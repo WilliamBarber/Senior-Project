@@ -139,9 +139,9 @@ class NewReportPage extends StatelessWidget {
               onChanged: (text) {
                 print('First text field: $text');
               },
-              maxLines: null,
+              /*maxLines: null,
               minLines: null,
-              expands: true,
+              expands: true,*/
             ),
             DropDownButton(),
             SeverityIndicator(),
