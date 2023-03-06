@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:custom_rating_bar/custom_rating_bar.dart';
+
+const List<String> issuesList = <String>['Drainage', 'Fallen Tree', 'Trail Erosion', 'Overgrown Shrubbery', 'Damage to Man-made Structure', 'Other (Specify in Description)'];
 
 void main() {
   runApp(const MyApp());
@@ -137,9 +139,69 @@ class NewReportPage extends StatelessWidget {
               onChanged: (text) {
                 print('First text field: $text');
               },
+              maxLines: null,
+              minLines: null,
+              expands: true,
             ),
+            DropDownButton(),
+            SeverityIndicator(),
           ]
       ),
     );
   }
+}
+
+class DropDownButton extends StatefulWidget {
+  const DropDownButton({super.key});
+
+  @override
+  State<DropDownButton> createState() => _DropDownButtonState();
+}
+
+class _DropDownButtonState extends State<DropDownButton> {
+  String? dropDownValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton<String>(
+      value: dropDownValue,
+      icon: const Icon(Icons.arrow_drop_down),
+      elevation: 16,
+      hint: Text('Select an issue'),
+      underline: Container(
+        height: 2,
+      ),
+      onChanged: (String? value) {
+        setState(() {
+          dropDownValue = value!;
+          print('Issues Drop-Down Menu Field: $value');
+        });
+      },
+      items: issuesList.map<DropdownMenuItem<String>>((String value){
+        return DropdownMenuItem<String>(
+        value: value,
+        child: Text(value),
+      );
+    }).toList(),
+    );
+  }
+}
+
+class SeverityIndicator extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return Column(
+        children: [
+          RatingBar(
+            filledIcon: Icons.star,
+            emptyIcon: Icons.star_border,
+            onRatingChanged: (value) => debugPrint('$value'),
+            initialRating: 1,
+            maxRating: 5,
+          ),
+          Text('Issue severity (5 stars is highest severity)'),
+        ]
+    );
+  }
+
 }

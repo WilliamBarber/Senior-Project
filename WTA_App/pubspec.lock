@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  custom_rating_bar:
+    dependency: "direct main"
+    description:
+      name: custom_rating_bar
+      sha256: "03eda8699dcbfbdb74683dbe26ae9b274e90b3745816dd122f2ed865cc611fe8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.4"
   english_words:
     dependency: "direct main"
     description:
@@ -210,4 +218,4 @@ packages:
     version: "2.1.4"
 sdks:
   dart: ">=2.19.1 <3.0.0"
-  flutter: ">=1.16.0"
+  flutter: ">=2.0.0"
