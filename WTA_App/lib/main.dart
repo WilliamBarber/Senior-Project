@@ -144,7 +144,7 @@ class NewReportPage extends StatelessWidget {
             SeverityIndicator(),
             TextField(
               decoration: const InputDecoration(
-                labelText: 'Enter a description for Your Report',
+                labelText: 'Enter a Description for Your Report',
               ),
               onChanged: (text) {
                 print('Description text field: $text');
