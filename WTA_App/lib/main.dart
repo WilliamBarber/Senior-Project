@@ -131,7 +131,7 @@ class NewReportPage extends StatelessWidget {
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextFormField(
+            TextField(
               decoration: const InputDecoration(
                 border: UnderlineInputBorder(),
                 labelText: 'Enter a Title for Your Report',
@@ -139,12 +139,18 @@ class NewReportPage extends StatelessWidget {
               onChanged: (text) {
                 print('First text field: $text');
               },
-              /*maxLines: null,
-              minLines: null,
-              expands: true,*/
             ),
             DropDownButton(),
             SeverityIndicator(),
+            TextField(
+              decoration: const InputDecoration(
+                labelText: 'Enter a description for Your Report',
+              ),
+              onChanged: (text) {
+                print('Description text field: $text');
+              },
+              maxLines: null,
+            ),
           ]
       ),
     );
