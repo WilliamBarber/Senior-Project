@@ -51,43 +51,48 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1:
         page = NewReportPage();
         break;
+      case 2:
+        page = SettingsPage();
+        break;
       default:
         throw UnimplementedError('no widget for $_selectedIndex');
     }
     return LayoutBuilder(
         builder: (context, constraints) {
           return Scaffold(
-              body: Row(
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SafeArea(
-                      child: NavigationRail(
-                        extended: constraints.maxWidth >= 600,
-                        destinations: [
-                          NavigationRailDestination(
-                            icon: Icon(Icons.home),
-                            label: Text('Home'),
-                          ),
-                          NavigationRailDestination(
-                            icon: Icon(Icons.add_circle),
-                            label: Text('New Report'),
-                          )
-                        ],
-                        selectedIndex: _selectedIndex,
-                        onDestinationSelected: (value) {
-                          setState(() {
-                            _selectedIndex = value;
-                          });
-                        },
-                      ),
-                  ),
                   Expanded(
-                      child: Container(
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                        child: page,
-                      ),
+                    child: Container(
+                      color: Theme.of(context).colorScheme.primaryContainer,
+                      child: page,
+                    ),
                   ),
                 ],
               ),
+            bottomNavigationBar: NavigationBar(
+              destinations: [
+                NavigationDestination(
+                  icon: Icon(Icons.home),
+                  label: 'Home',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.add_circle),
+                  label: 'New Report',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.settings),
+                  label: 'Settings',
+                ),
+              ],
+              selectedIndex: _selectedIndex,
+              onDestinationSelected: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+            ),
             floatingActionButton: FloatingActionButton.extended(
               onPressed: () {
                 setState(() {
@@ -110,7 +115,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -153,6 +157,22 @@ class NewReportPage extends StatelessWidget {
             ),
           ]
       ),
+    );
+  }
+}
+
+class SettingsPage extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    var appState = context.watch<MyAppState>();
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Placeholder'),
+        ]
+      )
+
     );
   }
 }
