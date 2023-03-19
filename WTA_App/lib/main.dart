@@ -218,14 +218,23 @@ class SettingsPage extends StatelessWidget {
     var appState = context.watch<MyAppState>();
     return Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      TextField(
-        decoration: const InputDecoration(
-          border: UnderlineInputBorder(),
-          labelText: 'Enter Contact Information',
-        ),
-        onChanged: (text) {
-          print('Contact Info: $text');
+          ElevatedButton(
+              onPressed: () {
+                print('Contact Info Button Clicked');
+              },
+              child: Text('Enter Contact Information'),
+          ),
+      ElevatedButton(
+        onPressed: () {
+          print('Previous Reports Button Clicked');
         },
+        child: Text('View All Previous Reports'),
+      ),
+      ElevatedButton(
+          onPressed: () {
+            print('App Permissions Requested from Settings Menu');
+          },
+          child: Text('Request App Permissions'),
       ),
     ]));
   }
