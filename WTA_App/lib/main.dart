@@ -7,8 +7,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
 
-
-const List<String> issuesList = <String>['Drainage', 'Fallen Tree', 'Trail Erosion', 'Overgrown Shrubbery', 'Damage to Man-made Structure', 'Other (Specify in Description)'];
+const List<String> issuesList = <String>[
+  'Drainage',
+  'Fallen Tree',
+  'Trail Erosion',
+  'Overgrown Shrubbery',
+  'Damage to Man-made Structure',
+  'Other (Specify in Description)'
+];
 
 void main() {
   runApp(const MyApp());
@@ -38,15 +44,11 @@ class MyAppState extends ChangeNotifier {
 }
 
 class MyHomePage extends StatefulWidget {
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
-
-
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   var _selectedIndex = 0;
 
   @override
@@ -65,57 +67,55 @@ class _MyHomePageState extends State<MyHomePage> {
       default:
         throw UnimplementedError('no widget for $_selectedIndex');
     }
-    return LayoutBuilder(
-        builder: (context, constraints) {
-          return Scaffold(
-              body: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Container(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      child: page,
-                    ),
-                  ),
-                ],
+    return LayoutBuilder(builder: (context, constraints) {
+      return Scaffold(
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Container(
+                color: Theme.of(context).colorScheme.primaryContainer,
+                child: page,
               ),
-            bottomNavigationBar: NavigationBar(
-              destinations: [
-                NavigationDestination(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                NavigationDestination(
-                  icon: Icon(Icons.add_circle),
-                  label: 'New Report',
-                ),
-                NavigationDestination(
-                  icon: Icon(Icons.settings),
-                  label: 'Settings',
-                ),
-              ],
-              selectedIndex: _selectedIndex,
-              onDestinationSelected: (index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
-              },
             ),
-            floatingActionButton: FloatingActionButton.extended(
-              onPressed: () {
-                setState(() {
-                  _selectedIndex = 1;
-                });
-              },
-              tooltip: 'AddNewReport',
-              icon: const Icon(Icons.add),
-              label: const Text('New Report'),
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.brown,
+          ],
+        ),
+        bottomNavigationBar: NavigationBar(
+          destinations: [
+            NavigationDestination(
+              icon: Icon(Icons.home),
+              label: 'Home',
             ),
-          );
-        }
-    );
+            NavigationDestination(
+              icon: Icon(Icons.add_circle),
+              label: 'New Report',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
+          ],
+          selectedIndex: _selectedIndex,
+          onDestinationSelected: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            setState(() {
+              _selectedIndex = 1;
+            });
+          },
+          tooltip: 'AddNewReport',
+          icon: const Icon(Icons.add),
+          label: const Text('New Report'),
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.brown,
+        ),
+      );
+    });
   }
 }
 
@@ -124,12 +124,40 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Homepage Placeholder'),
-        ]
-      ),
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Card(
+          margin: EdgeInsets.only(top: 10, bottom: 10),
+          child: FractionallySizedBox(
+            widthFactor: 0.85,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Previous Report Title'),
+                    Text('Previous Report Date'),
+                    Text('Previous Report Category'),
+                  ]),
+            ),
+          ),
+        ),
+        Card(
+          margin: EdgeInsets.only(top: 10, bottom: 10),
+          child: FractionallySizedBox(
+            widthFactor: 0.85,
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Previous Report Title'),
+                    Text('Previous Report Date'),
+                    Text('Previous Report Category'),
+                  ]),
+            ),
+          ),
+        ),
+      ]),
     );
   }
 }
@@ -140,56 +168,66 @@ class NewReportPage extends StatelessWidget {
     var appState = context.watch<MyAppState>();
 
     return Center(
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                labelText: 'Enter a Title for Your Report',
-              ),
-              onChanged: (text) {
-                print('First text field: $text');
-              },
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Card(
+          margin: EdgeInsets.only(top: 10, bottom: 10),
+          child: FractionallySizedBox(
+            widthFactor: 0.85,
+            child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TextField(
+                      textCapitalization: TextCapitalization.words,
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Enter a Title for Your Report',
+                      ),
+                      onChanged: (text) {
+                        print('First text field: $text');
+                      },
+                    ),
+                    DropDownButton(),
+                    SeverityIndicator(),
+                    TextField(
+                      textCapitalization: TextCapitalization.sentences,
+                      decoration: const InputDecoration(
+                        labelText: 'Enter a Description for Your Report',
+                      ),
+                      onChanged: (text) {
+                        print('Description text field: $text');
+                      },
+                      maxLines: null,
+                    ),
+                    Text('LOCATION HERE'),
+                    Text('PHOTOS HERE'),
+                  ],
+                ),
             ),
-            DropDownButton(),
-            SeverityIndicator(),
-            TextField(
-              decoration: const InputDecoration(
-                labelText: 'Enter a Description for Your Report',
-              ),
-              onChanged: (text) {
-                print('Description text field: $text');
-              },
-              maxLines: null,
-            ),
-          ]
-      ),
+          ),
+        ),
+      ]),
     );
   }
 }
 
-class SettingsPage extends StatelessWidget{
+class SettingsPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextField(
-            decoration: const InputDecoration(
-              border: UnderlineInputBorder(),
-              labelText: 'Enter Contact Information',
-            ),
-            onChanged: (text) {
-              print('Contact Info: $text');
-            },
-          ),
-        ]
-      )
-
-    );
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      TextField(
+        decoration: const InputDecoration(
+          border: UnderlineInputBorder(),
+          labelText: 'Enter Contact Information',
+        ),
+        onChanged: (text) {
+          print('Contact Info: $text');
+        },
+      ),
+    ]));
   }
 }
 
@@ -219,31 +257,28 @@ class _DropDownButtonState extends State<DropDownButton> {
           print('Issues Drop-Down Menu Field: $value');
         });
       },
-      items: issuesList.map<DropdownMenuItem<String>>((String value){
+      items: issuesList.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
-        value: value,
-        child: Text(value),
-      );
-    }).toList(),
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
     );
   }
 }
 
-class SeverityIndicator extends StatelessWidget{
+class SeverityIndicator extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
-    return Column(
-        children: [
-          RatingBar(
-            filledIcon: Icons.star,
-            emptyIcon: Icons.star_border,
-            onRatingChanged: (value) => debugPrint('$value'),
-            initialRating: 1,
-            maxRating: 5,
-          ),
-          Text('Issue severity (5 stars is highest severity)'),
-        ]
-    );
+  Widget build(BuildContext context) {
+    return Column(children: [
+      RatingBar(
+        filledIcon: Icons.star,
+        emptyIcon: Icons.star_border,
+        onRatingChanged: (value) => debugPrint('$value'),
+        initialRating: 1,
+        maxRating: 5,
+      ),
+      Text('Issue severity (5 stars is highest severity)'),
+    ]);
   }
-
 }
