@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "35482363477",
+    "firebase_url": "https://senior-project-d74ff-default-rtdb.firebaseio.com",
+    "project_id": "senior-project-d74ff",
+    "storage_bucket": "senior-project-d74ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35482363477:android:cbd864a5dd5103e89c16dc",
+        "android_client_info": {
+          "package_name": "com.example.wta_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "35482363477-4iqmlsin4vcio91d00cihan5b3rqn35o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwz5v3czRFy-uPbRDBEpeK3Wxv9nD4mm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "35482363477-4iqmlsin4vcio91d00cihan5b3rqn35o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "35482363477-mi9frn0j06e53133i66e4fg8smlt9hsk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.wtaApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
