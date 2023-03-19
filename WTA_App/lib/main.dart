@@ -202,6 +202,20 @@ class NewReportPage extends StatelessWidget {
                     ),
                     Text('LOCATION HERE'),
                     Text('PHOTOS HERE'),
+                    ElevatedButton(
+                      onPressed: () {
+                        print('Submit Report Clicked');
+                      },
+                      child: Text('Submit Report'),
+                    ),
+                    ElevatedButton(
+                      //TODO: Make the button or text red
+                        onPressed: () {
+                          print('Cancel Report Clicked');
+                          //TODO: Make the button send the user back to the homepage
+                        },
+                        child: Text('Cancel Report'),
+                    ),
                   ],
                 ),
             ),
