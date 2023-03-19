@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:custom_rating_bar/custom_rating_bar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'firebase_options.dart';
+
 
 const List<String> issuesList = <String>['Drainage', 'Fallen Tree', 'Trail Erosion', 'Overgrown Shrubbery', 'Damage to Man-made Structure', 'Other (Specify in Description)'];
 
@@ -35,6 +41,8 @@ class MyHomePage extends StatefulWidget {
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
+
+
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -169,7 +177,15 @@ class SettingsPage extends StatelessWidget{
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Placeholder'),
+          TextField(
+            decoration: const InputDecoration(
+              border: UnderlineInputBorder(),
+              labelText: 'Enter Contact Information',
+            ),
+            onChanged: (text) {
+              print('Contact Info: $text');
+            },
+          ),
         ]
       )
 
