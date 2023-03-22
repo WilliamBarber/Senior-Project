@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'HomePage.dart';
+import 'MyAppState.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +18,32 @@ const List<String> issuesList = <String>[
   'Other (Specify in Description)'
 ];
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
+  //Start Firebase testing
+  Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  var db = FirebaseFirestore.instance;
+  // Create a new user with a first and last name
+  final user = <String, dynamic>{
+    "first": "Ada",
+    "last": "Lovelace",
+    "born": 1815
+  };
+
+// Add a new document with a generated ID
+  db.collection("contacts").add(user).then((DocumentReference doc) =>
+      print('DocumentSnapshot added with ID: ${doc.id}'));
+
+  await db.collection("contacts").get().then((event) {
+    for (var doc in event.docs) {
+      print("${doc.id} => ${doc.data()}");
+    }
+  });
+//End Firebase testing
+
 }
 
 class MyApp extends StatelessWidget {
@@ -39,9 +65,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyAppState extends ChangeNotifier {
-  var current = 0;
-}
+
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -116,49 +140,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       );
     });
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-    return Center(
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Card(
-          margin: EdgeInsets.only(top: 10, bottom: 10),
-          child: FractionallySizedBox(
-            widthFactor: 0.85,
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Previous Report Title'),
-                    Text('Previous Report Date'),
-                    Text('Previous Report Category'),
-                  ]),
-            ),
-          ),
-        ),
-        Card(
-          margin: EdgeInsets.only(top: 10, bottom: 10),
-          child: FractionallySizedBox(
-            widthFactor: 0.85,
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Previous Report Title'),
-                    Text('Previous Report Date'),
-                    Text('Previous Report Category'),
-                  ]),
-            ),
-          ),
-        ),
-      ]),
-    );
   }
 }
 
