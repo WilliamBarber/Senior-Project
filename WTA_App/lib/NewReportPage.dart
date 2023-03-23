@@ -64,6 +64,7 @@ class NewReportPage extends StatelessWidget {
                         "description": description,
                         "title": title,
                         "severity": severity,
+                        "issue": issue,
                       };
 
                       // Add a new document with a generated ID

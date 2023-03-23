@@ -9,6 +9,8 @@ const List<String> issuesList = <String>[
   'Other (Specify in Description)'
 ];
 
+String issue = 'no issue selected';
+
 class _DropDownButtonState extends State<DropDownButton> {
   String? dropDownValue;
 
@@ -26,6 +28,7 @@ class _DropDownButtonState extends State<DropDownButton> {
         setState(() {
           dropDownValue = value!;
           print('Issues Drop-Down Menu Field: $value');
+          issue = value;
         });
       },
       items: issuesList.map<DropdownMenuItem<String>>((String value) {
