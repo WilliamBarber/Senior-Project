@@ -7,6 +7,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+String description = 'no description';
+
 class NewReportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class NewReportPage extends StatelessWidget {
                     ),
                     onChanged: (text) {
                       print('Description text field: $text');
+                      description = text;
                     },
                     maxLines: null,
                   ),
@@ -56,7 +59,7 @@ class NewReportPage extends StatelessWidget {
                       var db = FirebaseFirestore.instance;
                       // Create a new user with a first and last name
                       final user = <String, dynamic>{
-                        "first": "Ada",
+                        "description": description,
                         "last": "Lovelace",
                         "born": 1815
                       };
