@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+String title = "no title";
 String description = 'no description';
 
 class NewReportPage extends StatelessWidget {
@@ -33,6 +34,7 @@ class NewReportPage extends StatelessWidget {
                     ),
                     onChanged: (text) {
                       print('First text field: $text');
+                      title = text;
                     },
                   ),
                   DropDownButton(),
@@ -60,8 +62,8 @@ class NewReportPage extends StatelessWidget {
                       // Create a new user with a first and last name
                       final user = <String, dynamic>{
                         "description": description,
-                        "last": "Lovelace",
-                        "born": 1815
+                        "title": title,
+                        "severity": severity,
                       };
 
                       // Add a new document with a generated ID
