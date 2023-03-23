@@ -68,11 +68,11 @@ class NewReportPage extends StatelessWidget {
                       };
 
                       // Add a new document with a generated ID
-                      db.collection("contacts").add(user).then(
+                      db.collection("issue report").add(user).then(
                           (DocumentReference doc) => print(
                               'DocumentSnapshot added with ID: ${doc.id}'));
 
-                      await db.collection("contacts").get().then((event) {
+                      await db.collection("issue report").get().then((event) {
                         for (var doc in event.docs) {
                           print("${doc.id} => ${doc.data()}");
                         }
