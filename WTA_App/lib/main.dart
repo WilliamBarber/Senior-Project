@@ -7,9 +7,4 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
-  //Start Firebase testing
-
-
-//End Firebase testing
-
 }
