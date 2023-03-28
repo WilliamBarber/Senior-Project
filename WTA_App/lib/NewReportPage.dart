@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'DropDownButton.dart';
@@ -6,11 +7,21 @@ import 'SeverityIndicator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 
 String title = "no title";
 String description = 'no description';
 
-class NewReportPage extends StatelessWidget {
+class NewReportPage extends StatefulWidget {
+  @override
+  State<NewReportPage> createState() => _NewReportPageState();
+}
+
+class _NewReportPageState extends State<NewReportPage> {
+
+  final ImagePicker _picker = ImagePicker();
+  File? imageFile;
+
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
@@ -51,7 +62,40 @@ class NewReportPage extends StatelessWidget {
                     maxLines: null,
                   ),
                   Text('LOCATION HERE'),
-                  Text('PHOTOS HERE'),
+                  ElevatedButton(
+                    onPressed: () {
+                      print('Photos Button Clicked');
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return SizedBox(
+                            height: 200,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        _getFromGallery();
+                                      },
+                                      child: Text('Pick From File'),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      _getFromCamera();
+                                    },
+                                    child: Text('Take a Photo'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Text('Attach Photos'),
+                  ),
                   ElevatedButton(
                     onPressed: () async {
                       Firebase.initializeApp();
@@ -59,16 +103,17 @@ class NewReportPage extends StatelessWidget {
                         options: DefaultFirebaseOptions.currentPlatform,
                       );
                       var db = FirebaseFirestore.instance;
-                      // Create a new user with a first and last name
-                      final user = <String, dynamic>{
+                      // Create a new report with Description, Title, Severity, Issue type, and Images
+                      final report = <String, dynamic>{
                         "description": description,
                         "title": title,
                         "severity": severity,
                         "issue": issue,
+                        "image": imageFile,
                       };
 
                       // Add a new document with a generated ID
-                      db.collection("issue report").add(user).then(
+                      db.collection("issue report").add(report).then(
                           (DocumentReference doc) => print(
                               'DocumentSnapshot added with ID: ${doc.id}'));
 
@@ -97,4 +142,23 @@ class NewReportPage extends StatelessWidget {
       ]),
     );
   }
+
+  _getFromGallery() async{
+    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      imageFile = File(image.path);
+    }
+    print('image selected from file');
+  }
+
+  _getFromCamera() async{
+    XFile? image = await _picker.pickImage(source: ImageSource.camera);
+    if (image != null) {
+      setState(() {
+        imageFile = File(image.path);
+      });
+    }
+    print('image selected from camera');
+  }
+
 }
