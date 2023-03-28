@@ -42,7 +42,7 @@ android {
         applicationId "com.example.wta_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 19 //changed to 19 because of Firebase integration
+        minSdkVersion 20 //changed to 19 because of Firebase integration, 20 because of Google Maps integration
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
