@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
                     ElevatedButton(
                       child: Text('View Report'),
                       onPressed: () {
-                        appState.setPage(3);
+                        print('View Report Clicked');
                     },
                     ),
                   ]),
