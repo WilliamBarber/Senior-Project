@@ -98,34 +98,52 @@ class _NewReportPageState extends State<NewReportPage> {
                     child: Text('Attach Photos'),
                   ),
                   ElevatedButton(
-                    onPressed: () async {
-                      Firebase.initializeApp();
-                      await Firebase.initializeApp(
-                        options: DefaultFirebaseOptions.currentPlatform,
-                      );
-                      var db = FirebaseFirestore.instance;
-                      // Create a new report with Description, Title, Severity, Issue type, and Images
-                      final report = <String, dynamic>{
-                        "description": description,
-                        "title": title,
-                        "severity": severity,
-                        "issue": issue,
-                        "image": imageFile,
-                      };
+                    onPressed: () => showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Submit Report?'),
+                        content: const Text('Submit your trail issue report?'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'No'),
+                            child: const Text('No'),
+                          ),
+                          TextButton(
+                            onPressed: () async{
+                              Navigator.pop(context, 'Yes');
+                              Firebase.initializeApp();
+                              await Firebase.initializeApp(
+                                options: DefaultFirebaseOptions.currentPlatform,
+                              );
+                              var db = FirebaseFirestore.instance;
+                              // Create a new report with Description, Title, Severity, Issue type, and Images
+                              final report = <String, dynamic>{
+                                "description": description,
+                                "title": title,
+                                "severity": severity,
+                                "issue": issue,
+                                "image": imageFile,
+                              };
 
-                      // Add a new document with a generated ID
-                      db.collection("issue report").add(report).then(
-                          (DocumentReference doc) => print(
-                              'DocumentSnapshot added with ID: ${doc.id}'));
+                              // Add a new document with a generated ID
+                              db.collection("issue report").add(report).then(
+                                      (DocumentReference doc) => print(
+                                      'DocumentSnapshot added with ID: ${doc.id}'));
 
-                      await db.collection("issue report").get().then((event) {
-                        for (var doc in event.docs) {
-                          print("${doc.id} => ${doc.data()}");
-                        }
-                      });
-                      appState.addReport(OldReport(title, '31 March', issue, description, severity, 'test location', 'test photos'));
-                      print('Submit Report Clicked');
-                    },
+                              await db.collection("issue report").get().then((event) {
+                                for (var doc in event.docs) {
+                                  print("${doc.id} => ${doc.data()}");
+                                }
+                              });
+                              appState.addReport(OldReport(title, '31 March', issue, description, severity, 'test location', 'test photos'));
+                              print('Submit Report Clicked');
+                              appState.setPage(0);
+                            },
+                            child: const Text('Yes'),
+                          ),
+                        ],
+                      ),
+                    ),
                     child: Text('Submit Report'),
                   ),
                   ElevatedButton(
