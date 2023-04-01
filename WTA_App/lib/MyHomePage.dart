@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'HomePage.dart';
 import 'NewReportPage.dart';
 import 'SettingsPage.dart';
-import 'OldReportPage.dart';
 import 'MyAppState.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -22,9 +21,6 @@ class MyHomePage extends StatelessWidget {
         break;
       case 2:
         page = SettingsPage();
-        break;
-      case 3:
-        page = OldReportPage();
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
