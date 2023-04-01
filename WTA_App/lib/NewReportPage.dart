@@ -130,10 +130,26 @@ class _NewReportPageState extends State<NewReportPage> {
                   ),
                   ElevatedButton(
                     //TODO: Make the button or text red
-                    onPressed: () {
-                      appState.setPage(0);
-                      //TODO: Make the button send the user back to the homepage
-                    },
+                    onPressed: () => showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Cancel Report?'),
+                        content: const Text('Cancel report and return to homescreen?'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'No'),
+                            child: const Text('No'),
+                          ),
+                          TextButton(
+                            onPressed: (){
+                              Navigator.pop(context, 'Yes');
+                              appState.setPage(0);
+                            },
+                            child: const Text('Yes'),
+                          ),
+                        ],
+                      ),
+                    ),
                     child: Text('Cancel Report'),
                   ),
                 ],
