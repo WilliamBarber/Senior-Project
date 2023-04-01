@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'MyAppState.dart';
+import 'OldReport.dart';
 
 class OldReportPage extends StatelessWidget {
-  const OldReportPage({super.key, required this.reportNumber});
+  const OldReportPage({super.key, required this.report});
 
-  final int reportNumber;
+  final OldReport report;
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
     return Scaffold(
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -22,13 +20,13 @@ class OldReportPage extends StatelessWidget {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Title: ${appState.getReport(reportNumber).getTitle()}'),
-                        Text('Date: ${appState.getReport(reportNumber).getDate()}'),
-                        Text('Issue Category: ${appState.getReport(reportNumber).getCategory()}'),
-                        Text('Severity: ${appState.getReport(reportNumber).getSeverity().toInt()} / 5'),
-                        Text('Description: ${appState.getReport(reportNumber).getDescription()}'),
-                        Text('Location: ${appState.getReport(reportNumber).getLocation()}'),
-                        Text('Photos: ${appState.getReport(reportNumber).getPhotos()}'),
+                        Text('Title: ${report.getTitle()}'),
+                        Text('Date: ${report.getDate()}'),
+                        Text('Issue Category: ${report.getCategory()}'),
+                        Text('Severity: ${report.getSeverity().toInt()} / 5'),
+                        Text('Description: ${report.getDescription()}'),
+                        Text('Location: ${report.getLocation()}'),
+                        Text('Photos: ${report.getPhotos()}'),
                         ElevatedButton(
                           onPressed: () {
                             Navigator.pop(context);

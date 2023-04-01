@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const OldReportPage(reportNumber: 0)),
+                          MaterialPageRoute(builder: (context) => OldReportPage(report: appState.getReport(0))),
                         );
                       },
                     ),
@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const OldReportPage(reportNumber: 1)),
+                          MaterialPageRoute(builder: (context) => OldReportPage(report: appState.getReport(1))),
                         );
                     },
                     ),

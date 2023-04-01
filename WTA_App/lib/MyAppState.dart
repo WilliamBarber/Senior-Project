@@ -18,6 +18,7 @@ class MyAppState extends ChangeNotifier {
   void addReport(oldReport) {
     oldReports.add(oldReport);
   }
+
   OldReport getReport(int reportNumber){
     if (oldReports.length > reportNumber){
       return oldReports[reportNumber];
