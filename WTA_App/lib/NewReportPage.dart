@@ -134,7 +134,7 @@ class _NewReportPageState extends State<NewReportPage> {
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
                         title: const Text('Cancel Report?'),
-                        content: const Text('Cancel report and return to homescreen?'),
+                        content: const Text('Cancel report and return to the home screen?'),
                         actions: <Widget>[
                           TextButton(
                             onPressed: () => Navigator.pop(context, 'No'),
