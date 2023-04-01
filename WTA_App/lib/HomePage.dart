@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'MyAppState.dart';
+import 'OldReportPage.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -23,7 +24,10 @@ class HomePage extends StatelessWidget {
                     ElevatedButton(
                       child: Text('View Report'),
                       onPressed: () {
-                        print('View Report Clicked');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const OldReportPage(reportNumber: 0)),
+                        );
                       },
                     ),
                   ]),
@@ -45,7 +49,10 @@ class HomePage extends StatelessWidget {
                     ElevatedButton(
                       child: Text('View Report'),
                       onPressed: () {
-                        print('View Report Clicked');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const OldReportPage(reportNumber: 1)),
+                        );
                     },
                     ),
                   ]),
