@@ -1,16 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'HomePage.dart';
 import 'NewReportPage.dart';
 import 'SettingsPage.dart';
+import 'OldReportPage.dart';
+import 'MyAppState.dart';
 
-class _MyHomePageState extends State<MyHomePage> {
-  var _selectedIndex = 0;
-
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var appState = context.watch<MyAppState>();
+    var selectedIndex = appState.getPage();
     Widget page;
-    switch (_selectedIndex) {
+    switch (selectedIndex) {
       case 0:
         page = HomePage();
         break;
@@ -20,8 +23,11 @@ class _MyHomePageState extends State<MyHomePage> {
       case 2:
         page = SettingsPage();
         break;
+      case 3:
+        page = OldReportPage();
+        break;
       default:
-        throw UnimplementedError('no widget for $_selectedIndex');
+        throw UnimplementedError('no widget for $selectedIndex');
     }
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
@@ -51,18 +57,14 @@ class _MyHomePageState extends State<MyHomePage> {
               label: 'Settings',
             ),
           ],
-          selectedIndex: _selectedIndex,
+          selectedIndex: selectedIndex,
           onDestinationSelected: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
+            appState.setPage(index);
           },
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            setState(() {
-              _selectedIndex = 1;
-            });
+            appState.setPage(1);
           },
           tooltip: 'AddNewReport',
           icon: const Icon(Icons.add),
@@ -73,9 +75,4 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     });
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
 }

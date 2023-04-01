@@ -131,7 +131,7 @@ class _NewReportPageState extends State<NewReportPage> {
                   ElevatedButton(
                     //TODO: Make the button or text red
                     onPressed: () {
-                      print('Cancel Report Clicked');
+                      appState.setPage(0);
                       //TODO: Make the button send the user back to the homepage
                     },
                     child: Text('Cancel Report'),
