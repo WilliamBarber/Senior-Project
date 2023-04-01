@@ -136,8 +136,11 @@ class _NewReportPageState extends State<NewReportPage> {
                                 }
                               });
                               appState.addReport(OldReport(title, '31 March', issue, description, severity, 'test location', 'test photos'));
-                              print('Submit Report Clicked');
                               appState.setPage(0);
+                              final snackBar = SnackBar(
+                                content: Text('Report Successfully Submitted!'),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             },
                             child: const Text('Yes'),
                           ),
