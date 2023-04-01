@@ -5,7 +5,7 @@ import 'MyAppState.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
+    var appState = context.watch<MyAppState>();z
     return Center(
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Card(
@@ -17,9 +17,9 @@ class HomePage extends StatelessWidget {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Previous Report Title'),
-                    Text('Previous Report Date'),
-                    Text('Previous Report Category'),
+                    Text('Title: ${appState.getReport(0).getTitle()}'),
+                    Text('Date: ${appState.getReport(0).getDate()}'),
+                    Text('Issue Category: ${appState.getReport(0).getCategory()}'),
                   ]),
             ),
           ),
@@ -33,9 +33,9 @@ class HomePage extends StatelessWidget {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Previous Report Title'),
-                    Text('Previous Report Date'),
-                    Text('Previous Report Category'),
+                    Text('Title: ${appState.getReport(1).getTitle()}'),
+                    Text('Date: ${appState.getReport(1).getDate()}'),
+                    Text('Issue Category: ${appState.getReport(1).getCategory()}'),
                   ]),
             ),
           ),

@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:wta_app/OldReport.dart';
 
 String title = "no title";
 String description = 'no description';
@@ -122,6 +123,7 @@ class _NewReportPageState extends State<NewReportPage> {
                           print("${doc.id} => ${doc.data()}");
                         }
                       });
+                      appState.addReport(OldReport(title, '31 March', issue, description, severity, 'test location', 'test photos'));
                       print('Submit Report Clicked');
                     },
                     child: Text('Submit Report'),
