@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:custom_rating_bar/custom_rating_bar.dart';
 
-double severity = 0;
+double severity = 1;
 
 class SeverityIndicator extends StatelessWidget {
   @override

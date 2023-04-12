@@ -4,11 +4,9 @@ import 'package:provider/provider.dart';
 import 'DropDownButton.dart';
 import 'MyAppState.dart';
 import 'SeverityIndicator.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wta_app/OldReport.dart';
+import 'NewReport.dart';
 
 String title = "no title";
 String description = 'no description';
@@ -109,32 +107,9 @@ class _NewReportPageState extends State<NewReportPage> {
                             child: const Text('No'),
                           ),
                           TextButton(
-                            onPressed: () async{
+                            onPressed: (){
                               Navigator.pop(context, 'Yes');
-                              Firebase.initializeApp();
-                              await Firebase.initializeApp(
-                                options: DefaultFirebaseOptions.currentPlatform,
-                              );
-                              var db = FirebaseFirestore.instance;
-                              // Create a new report with Description, Title, Severity, Issue type, and Images
-                              final report = <String, dynamic>{
-                                "description": description,
-                                "title": title,
-                                "severity": severity,
-                                "issue": issue,
-                                "image": imageFile,
-                              };
-
-                              // Add a new document with a generated ID
-                              db.collection("issue report").add(report).then(
-                                      (DocumentReference doc) => print(
-                                      'DocumentSnapshot added with ID: ${doc.id}'));
-
-                              await db.collection("issue report").get().then((event) {
-                                for (var doc in event.docs) {
-                                  print("${doc.id} => ${doc.data()}");
-                                }
-                              });
+                              NewReport.submitReport(title, description, severity, issue, imageFile);
                               appState.addReport(OldReport(title, '31 March', issue, description, severity, 'test location', 'test photos'));
                               appState.setPage(0);
                               final snackBar = SnackBar(
