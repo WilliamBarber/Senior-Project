@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
       child: FractionallySizedBox(//start new
         widthFactor: 0.85,
       child: ListView.builder(
+        shrinkWrap: true,
       itemCount: oldReports.length > 3? 3 : oldReports.length,
       itemBuilder: (context, reportNumber) {
         return Card(
