@@ -21,10 +21,12 @@ class NewReport{
     var db = FirebaseFirestore.instance;
 
     //Start Image Submission
-    await FirebaseAuth.instance.signInAnonymously();
-    final storageRef = FirebaseStorage.instance.ref();
-    await storageRef.child("Image File").putFile(imageFile!);
-    final imageURL = await storageRef.child("Image File").getDownloadURL();
+      await FirebaseAuth.instance.signInAnonymously();
+      final storageRef = FirebaseStorage.instance.ref();
+      await storageRef.child("Image File").putFile(imageFile!);
+      final imageURL = await storageRef.child("Image File").getDownloadURL();
+
+
     //End Image Submission
 
     // Create a new report with Description, Title, Severity, Issue type, and Image URL
@@ -48,4 +50,39 @@ class NewReport{
     });
     return imageURL;
   }
+
+    static submitNoImageReport(String title, String description, double severity, String issue) async {
+      print('');
+      print('');
+      print('');
+      print("attempting submission");
+      print('');
+      print('');
+
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+
+      var db = FirebaseFirestore.instance;
+
+      // Create a new report with Description, Title, Severity, Issue type, and Image URL
+      final report = <String, dynamic>{
+        "title": title,
+        "description": description,
+        "severity": severity,
+        "issue": issue,
+        "image": 'No Image',
+      };
+
+      // Add a new document with a generated ID
+      db.collection("issue report").add(report).then(
+              (DocumentReference doc) => print(
+              'DocumentSnapshot added with ID: ${doc.id}'));
+
+      await db.collection("issue report").get().then((event) {
+        for (var doc in event.docs) {
+          print("${doc.id} => ${doc.data()}");
+        }
+      });
+    }
 }

@@ -109,13 +109,20 @@ class _NewReportPageState extends State<NewReportPage> {
                           TextButton(
                             onPressed: () async {
                               Navigator.pop(context, 'Yes');
-                              String imageURL = await NewReport.submitReport(title, description, severity, issue, imageFile);
-                              appState.addReport(OldReport(title, '31 March', issue, description, severity, 'test location', imageURL));
+                              if (imageFile != null){
+                                String imageURL = await NewReport.submitReport(title, description, severity, issue, imageFile);
+                                appState.addReport(OldReport(title, '31 March', issue, description, severity, 'test location', imageURL));
+                              }
+                              else{
+                                NewReport.submitNoImageReport(title, description, severity, issue);
+                                appState.addReport(OldReport.noPhotos(title, '31 March', issue, description, severity, 'test location'));
+                              }
+
                               appState.setPage(0);
                               final snackBar = SnackBar(
                                 content: Text('Report Successfully Submitted!'),
                               );
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              //ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             },
                             child: const Text('Yes'),
                           ),

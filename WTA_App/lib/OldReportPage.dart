@@ -28,7 +28,7 @@ class OldReportPage extends StatelessWidget {
                         Text('Description: ${report.getDescription()}'),
                         Text('Location: ${report.getLocation()}'),
                         //Text('Photos: ${report.getPhotos()}'),
-                        ElevatedButton(
+                        if (report.getPhotos() != 'no photos') ElevatedButton(
                           child: Text('View Photos'),
                           onPressed: () {
                             Navigator.push(

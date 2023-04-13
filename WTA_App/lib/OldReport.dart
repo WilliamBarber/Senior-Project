@@ -8,6 +8,7 @@ class OldReport{
   String photos = 'no photos';
 
   OldReport(this.title, this.date, this.category, this.description, this.severity, this.location, this.photos);
+  OldReport.noPhotos(this.title, this.date, this.category, this.description, this.severity, this.location);
   OldReport.empty();
 
   String getTitle(){
