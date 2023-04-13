@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'OldReport.dart';
+import 'PhotoViewer.dart';
 
 class OldReportPage extends StatelessWidget {
   const OldReportPage({super.key, required this.report});
@@ -26,7 +27,16 @@ class OldReportPage extends StatelessWidget {
                         Text('Severity: ${report.getSeverity().toInt()} / 5'),
                         Text('Description: ${report.getDescription()}'),
                         Text('Location: ${report.getLocation()}'),
-                        Text('Photos: ${report.getPhotos()}'),
+                        //Text('Photos: ${report.getPhotos()}'),
+                        ElevatedButton(
+                          child: Text('View Photos'),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => PhotoViewer(photoURL: report.getPhotos())),
+                            );
+                          },
+                        ),
                         ElevatedButton(
                           onPressed: () {
                             Navigator.pop(context);
