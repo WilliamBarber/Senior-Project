@@ -1,12 +1,10 @@
 import 'dart:io';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class NewReport{
-    static void submitReport(String title, String description, double severity, String issue, File? imageFile) async {
+    static Future<String> submitReport(String title, String description, double severity, String issue, File? imageFile) async {
       print('');
       print('');
       print('');
@@ -14,9 +12,6 @@ class NewReport{
       print('');
       print('');
 
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
     var db = FirebaseFirestore.instance;
 
     //Start Image Submission
@@ -45,5 +40,6 @@ class NewReport{
         print("${doc.id} => ${doc.data()}");
       }
     });
+    return imageURL;
   }
 }

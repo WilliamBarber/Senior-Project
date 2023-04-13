@@ -107,10 +107,10 @@ class _NewReportPageState extends State<NewReportPage> {
                             child: const Text('No'),
                           ),
                           TextButton(
-                            onPressed: (){
+                            onPressed: () async {
                               Navigator.pop(context, 'Yes');
-                              NewReport.submitReport(title, description, severity, issue, imageFile);
-                              appState.addReport(OldReport(title, '31 March', issue, description, severity, 'test location', 'test photos'));
+                              String imageURL = await NewReport.submitReport(title, description, severity, issue, imageFile);
+                              appState.addReport(OldReport(title, '31 March', issue, description, severity, 'test location', imageURL));
                               appState.setPage(0);
                               final snackBar = SnackBar(
                                 content: Text('Report Successfully Submitted!'),
