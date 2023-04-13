@@ -26,4 +26,8 @@ class MyAppState extends ChangeNotifier {
     return OldReport.empty();
   }
 
+  List<OldReport> getAllReports(){
+    return oldReports;
+  }
+
 }
