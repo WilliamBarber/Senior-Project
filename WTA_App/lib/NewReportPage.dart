@@ -119,9 +119,9 @@ class _NewReportPageState extends State<NewReportPage> {
                               }
 
                               appState.setPage(0);
-                              final snackBar = SnackBar(
-                                content: Text('Report Successfully Submitted!'),
-                              );
+                              // final snackBar = SnackBar(
+                              //   content: Text('Report Successfully Submitted!'),
+                              // );
                               //ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             },
                             child: const Text('Yes'),
