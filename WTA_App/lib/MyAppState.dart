@@ -6,12 +6,12 @@ class MyAppState extends ChangeNotifier {
   var oldReports = <OldReport>[];
   var selectedIndex = 0;
 
-  void setPage(int page){
+  void setPage(int page) {
     selectedIndex = page;
     notifyListeners();
   }
 
-  int getPage(){
+  int getPage() {
     return selectedIndex;
   }
 
@@ -19,15 +19,14 @@ class MyAppState extends ChangeNotifier {
     oldReports.add(oldReport);
   }
 
-  OldReport getReport(int reportNumber){
-    if (oldReports.length > reportNumber){
+  OldReport getReport(int reportNumber) {
+    if (oldReports.length > reportNumber) {
       return oldReports[reportNumber];
     }
     return OldReport.empty();
   }
 
-  List<OldReport> getAllReports(){
+  List<OldReport> getAllReports() {
     return oldReports;
   }
-
 }

@@ -17,7 +17,6 @@ class NewReportPage extends StatefulWidget {
 }
 
 class _NewReportPageState extends State<NewReportPage> {
-
   final ImagePicker _picker = ImagePicker();
   File? imageFile;
 
@@ -75,10 +74,10 @@ class _NewReportPageState extends State<NewReportPage> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   ElevatedButton(
-                                      onPressed: () {
-                                        _getFromGallery();
-                                      },
-                                      child: Text('Pick From File'),
+                                    onPressed: () {
+                                      _getFromGallery();
+                                    },
+                                    child: Text('Pick From File'),
                                   ),
                                   ElevatedButton(
                                     onPressed: () {
@@ -109,13 +108,31 @@ class _NewReportPageState extends State<NewReportPage> {
                           TextButton(
                             onPressed: () async {
                               Navigator.pop(context, 'Yes');
-                              if (imageFile != null){
-                                String imageURL = await NewReport.submitReport(title, description, severity, issue, imageFile);
-                                appState.addReport(OldReport(title, '31 March', issue, description, severity, 'test location', imageURL));
-                              }
-                              else{
-                                NewReport.submitNoImageReport(title, description, severity, issue);
-                                appState.addReport(OldReport.noPhotos(title, '31 March', issue, description, severity, 'test location'));
+                              if (imageFile != null) {
+                                String imageURL = await NewReport.submitReport(
+                                    title,
+                                    description,
+                                    severity,
+                                    issue,
+                                    imageFile);
+                                appState.addReport(OldReport(
+                                    title,
+                                    '31 March',
+                                    issue,
+                                    description,
+                                    severity,
+                                    'test location',
+                                    imageURL));
+                              } else {
+                                NewReport.submitNoImageReport(
+                                    title, description, severity, issue);
+                                appState.addReport(OldReport.noPhotos(
+                                    title,
+                                    '31 March',
+                                    issue,
+                                    description,
+                                    severity,
+                                    'test location'));
                               }
 
                               appState.setPage(0);
@@ -137,14 +154,15 @@ class _NewReportPageState extends State<NewReportPage> {
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
                         title: const Text('Cancel Report?'),
-                        content: const Text('Cancel report and return to the home screen?'),
+                        content: const Text(
+                            'Cancel report and return to the home screen?'),
                         actions: <Widget>[
                           TextButton(
                             onPressed: () => Navigator.pop(context, 'No'),
                             child: const Text('No'),
                           ),
                           TextButton(
-                            onPressed: (){
+                            onPressed: () {
                               Navigator.pop(context, 'Yes');
                               appState.setPage(0);
                             },
@@ -164,7 +182,7 @@ class _NewReportPageState extends State<NewReportPage> {
     );
   }
 
-  _getFromGallery() async{
+  _getFromGallery() async {
     XFile? image = await _picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       imageFile = File(image.path);
@@ -172,7 +190,7 @@ class _NewReportPageState extends State<NewReportPage> {
     print('image selected from file');
   }
 
-  _getFromCamera() async{
+  _getFromCamera() async {
     XFile? image = await _picker.pickImage(source: ImageSource.camera);
     if (image != null) {
       setState(() {
@@ -181,5 +199,4 @@ class _NewReportPageState extends State<NewReportPage> {
     }
     print('image selected from camera');
   }
-
 }

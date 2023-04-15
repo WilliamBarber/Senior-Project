@@ -1,4 +1,4 @@
-class OldReport{
+class OldReport {
   String title = 'no title';
   String date = 'no date';
   String category = 'no category';
@@ -7,35 +7,37 @@ class OldReport{
   String location = 'no location';
   String photos = 'no photos';
 
-  OldReport(this.title, this.date, this.category, this.description, this.severity, this.location, this.photos);
-  OldReport.noPhotos(this.title, this.date, this.category, this.description, this.severity, this.location);
+  OldReport(this.title, this.date, this.category, this.description,
+      this.severity, this.location, this.photos);
+  OldReport.noPhotos(this.title, this.date, this.category, this.description,
+      this.severity, this.location);
   OldReport.empty();
 
-  String getTitle(){
+  String getTitle() {
     return title;
   }
 
-  String getDate(){
+  String getDate() {
     return date;
   }
 
-  String getCategory(){
+  String getCategory() {
     return category;
   }
 
-  String getDescription(){
+  String getDescription() {
     return description;
   }
 
-  double getSeverity(){
+  double getSeverity() {
     return severity;
   }
 
-  String getLocation(){
+  String getLocation() {
     return location;
   }
 
-  String getPhotos(){
+  String getPhotos() {
     return photos;
   }
 }

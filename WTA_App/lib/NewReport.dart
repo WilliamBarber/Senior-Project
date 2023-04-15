@@ -5,27 +5,27 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 
-class NewReport{
-    static Future<String> submitReport(String title, String description, double severity, String issue, File? imageFile) async {
-      print('');
-      print('');
-      print('');
-      print("attempting submission");
-      print('');
-      print('');
+class NewReport {
+  static Future<String> submitReport(String title, String description,
+      double severity, String issue, File? imageFile) async {
+    print('');
+    print('');
+    print('');
+    print("attempting submission");
+    print('');
+    print('');
 
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
     var db = FirebaseFirestore.instance;
 
     //Start Image Submission
-      await FirebaseAuth.instance.signInAnonymously();
-      final storageRef = FirebaseStorage.instance.ref();
-      await storageRef.child("Image File").putFile(imageFile!);
-      final imageURL = await storageRef.child("Image File").getDownloadURL();
-
+    await FirebaseAuth.instance.signInAnonymously();
+    final storageRef = FirebaseStorage.instance.ref();
+    await storageRef.child("Image File").putFile(imageFile!);
+    final imageURL = await storageRef.child("Image File").getDownloadURL();
 
     //End Image Submission
 
@@ -39,9 +39,8 @@ class NewReport{
     };
 
     // Add a new document with a generated ID
-    db.collection("issue report").add(report).then(
-            (DocumentReference doc) => print(
-            'DocumentSnapshot added with ID: ${doc.id}'));
+    db.collection("issue report").add(report).then((DocumentReference doc) =>
+        print('DocumentSnapshot added with ID: ${doc.id}'));
 
     await db.collection("issue report").get().then((event) {
       for (var doc in event.docs) {
@@ -51,38 +50,38 @@ class NewReport{
     return imageURL;
   }
 
-    static submitNoImageReport(String title, String description, double severity, String issue) async {
-      print('');
-      print('');
-      print('');
-      print("attempting submission");
-      print('');
-      print('');
+  static submitNoImageReport(
+      String title, String description, double severity, String issue) async {
+    print('');
+    print('');
+    print('');
+    print("attempting submission");
+    print('');
+    print('');
 
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
-      var db = FirebaseFirestore.instance;
+    var db = FirebaseFirestore.instance;
 
-      // Create a new report with Description, Title, Severity, Issue type, and Image URL
-      final report = <String, dynamic>{
-        "title": title,
-        "description": description,
-        "severity": severity,
-        "issue": issue,
-        "image": 'No Image',
-      };
+    // Create a new report with Description, Title, Severity, Issue type, and Image URL
+    final report = <String, dynamic>{
+      "title": title,
+      "description": description,
+      "severity": severity,
+      "issue": issue,
+      "image": 'No Image',
+    };
 
-      // Add a new document with a generated ID
-      db.collection("issue report").add(report).then(
-              (DocumentReference doc) => print(
-              'DocumentSnapshot added with ID: ${doc.id}'));
+    // Add a new document with a generated ID
+    db.collection("issue report").add(report).then((DocumentReference doc) =>
+        print('DocumentSnapshot added with ID: ${doc.id}'));
 
-      await db.collection("issue report").get().then((event) {
-        for (var doc in event.docs) {
-          print("${doc.id} => ${doc.data()}");
-        }
-      });
-    }
+    await db.collection("issue report").get().then((event) {
+      for (var doc in event.docs) {
+        print("${doc.id} => ${doc.data()}");
+      }
+    });
+  }
 }

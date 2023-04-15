@@ -28,15 +28,18 @@ class OldReportPage extends StatelessWidget {
                         Text('Description: ${report.getDescription()}'),
                         Text('Location: ${report.getLocation()}'),
                         //Text('Photos: ${report.getPhotos()}'),
-                        if (report.getPhotos() != 'no photos') ElevatedButton(
-                          child: Text('View Photos'),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => PhotoViewer(photoURL: report.getPhotos())),
-                            );
-                          },
-                        ),
+                        if (report.getPhotos() != 'no photos')
+                          ElevatedButton(
+                            child: Text('View Photos'),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PhotoViewer(
+                                        photoURL: report.getPhotos())),
+                              );
+                            },
+                          ),
                         ElevatedButton(
                           onPressed: () {
                             Navigator.pop(context);

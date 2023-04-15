@@ -65,7 +65,8 @@ class DefaultFirebaseOptions {
     projectId: 'senior-project-d74ff',
     databaseURL: 'https://senior-project-d74ff-default-rtdb.firebaseio.com',
     storageBucket: 'senior-project-d74ff.appspot.com',
-    iosClientId: '35482363477-mi9frn0j06e53133i66e4fg8smlt9hsk.apps.googleusercontent.com',
+    iosClientId:
+        '35482363477-mi9frn0j06e53133i66e4fg8smlt9hsk.apps.googleusercontent.com',
     iosBundleId: 'com.example.wtaApp',
   );
 }
