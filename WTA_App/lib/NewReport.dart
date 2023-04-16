@@ -7,7 +7,7 @@ import 'firebase_options.dart';
 
 class NewReport {
   static Future<String> submitReport(String title, String description,
-      double severity, String issue, File? imageFile, String date) async {
+      double severity, String issue, File? imageFile, String date, String time) async {
     print('');
     print('');
     print('');
@@ -24,13 +24,13 @@ class NewReport {
     //Start Image Submission
     await FirebaseAuth.instance.signInAnonymously();
     final storageRef = FirebaseStorage.instance.ref();
-    await storageRef.child("Image File").putFile(imageFile!);
-    final imageURL = await storageRef.child("Image File").getDownloadURL();
+    await storageRef.child("$date-$time-$title").putFile(imageFile!);
+    final imageURL = await storageRef.child("$date-$time-$title").getDownloadURL();
 
     //End Image Submission
 
-    // Add a new document with a specified ID
-    db.collection("issue report").doc("test_id").set({"title": title,
+    db.collection("issue report").doc("$date-$time-$title").set({
+      "title": title,
       "description": description,
       "severity": severity,
       "issue": issue,
@@ -46,7 +46,7 @@ class NewReport {
   }
 
   static submitNoImageReport(
-      String title, String description, double severity, String issue, String date) async {
+      String title, String description, double severity, String issue, String date, String time) async {
     print('');
     print('');
     print('');
@@ -60,19 +60,14 @@ class NewReport {
 
     var db = FirebaseFirestore.instance;
 
-    // Create a new report with Description, Title, Severity, Issue type, and Image URL
-    final report = <String, dynamic>{
+    db.collection("issue report").doc("$date-$time-$title").set({
       "title": title,
       "description": description,
       "severity": severity,
       "issue": issue,
       "image": 'No Image',
       "date": date,
-    };
-
-    // Add a new document with a generated ID
-    db.collection("issue report").add(report).then((DocumentReference doc) =>
-        print('DocumentSnapshot added with ID: ${doc.id}'));
+    });
 
     await db.collection("issue report").get().then((event) {
       for (var doc in event.docs) {

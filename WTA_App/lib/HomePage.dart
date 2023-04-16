@@ -3,6 +3,14 @@ import 'package:provider/provider.dart';
 import 'MyAppState.dart';
 import 'OldReportPage.dart';
 
+//TODO: warning for going home from new report page
+//TODO: actually intelligible report ids
+//TODO: mapping integration
+//TODO: required/optional fields
+//TODO: authentication
+//TODO: unique image URLs
+//TODO: generate old reports list from firebase instead of only from locally stored files from the current session
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

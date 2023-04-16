@@ -109,6 +109,7 @@ class _NewReportPageState extends State<NewReportPage> {
                               Navigator.pop(context, 'Yes');
                               DateTime dateTime = DateTime.now();
                               String date = "${dateTime.day}-${dateTime.month}-${dateTime.year}";
+                              String time = "${dateTime.hour}-${dateTime.minute}-${dateTime.second}";
                               if (imageFile != null) {
                                 String imageURL = await NewReport.submitReport(
                                     title,
@@ -117,6 +118,7 @@ class _NewReportPageState extends State<NewReportPage> {
                                     issue,
                                     imageFile,
                                     date,
+                                    time,
                                     );
                                 appState.addReport(OldReport(
                                     title,
@@ -128,7 +130,7 @@ class _NewReportPageState extends State<NewReportPage> {
                                     imageURL));
                               } else {
                                 NewReport.submitNoImageReport(
-                                    title, description, severity, issue, date);
+                                    title, description, severity, issue, date, time);
                                 appState.addReport(OldReport.noPhotos(
                                     title,
                                     date,
