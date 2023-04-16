@@ -6,28 +6,45 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      ElevatedButton(
-        onPressed: () {
-          print('Contact Info Button Clicked');
-        },
-        child: Text('Enter Contact Information'),
-      ),
-      ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) {
-              return Scaffold(body: AllPreviousReportsPage());
-            }),
-          );
-        },
-        child: Text('View All Previous Reports'),
-      ),
-      ElevatedButton(
-        onPressed: () {
-          print('App Permissions Requested from Settings Menu');
-        },
-        child: Text('Request App Permissions'),
+      FractionallySizedBox(
+        widthFactor: 0.85,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            FractionallySizedBox(
+              widthFactor: 0.7,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return Scaffold(body: AllPreviousReportsPage());
+                    }),
+                  );
+                },
+                child: Text('View All Previous Reports'),
+              ),
+            ),
+            FractionallySizedBox(
+              widthFactor: 0.7,
+              child: ElevatedButton(
+                onPressed: () {
+                  print('App Permissions Requested from Settings Menu');
+                },
+                child: Text('Request App Permissions'),
+              ),
+            ),
+            FractionallySizedBox(
+              widthFactor: 0.7,
+              child: ElevatedButton(
+                onPressed: () {
+                  print('About App Button Clicked');
+                },
+                child: Text('About This App'),
+              ),
+            ),
+          ]),
+        ),
       ),
     ]));
   }
