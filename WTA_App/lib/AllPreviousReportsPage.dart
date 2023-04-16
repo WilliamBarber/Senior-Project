@@ -17,24 +17,6 @@ class AllPreviousReportsPage extends StatelessWidget {
               .style
               .apply(fontSizeFactor: 2.0),
         ),
-        // bottomSheet: Container(
-        //   color: Colors.lightGreen[200],
-        //   height: 78,
-        //   child: Center(
-        //     child: Column(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       mainAxisSize: MainAxisSize.min,
-        //       children: <Widget>[
-        //         ElevatedButton(
-        //           child: const Text('Return to settings page'),
-        //           onPressed: () {
-        //             Navigator.pop(context);
-        //           },
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
         body: oldReports.isEmpty
             ? Center(
                 child: FractionallySizedBox(
@@ -86,7 +68,7 @@ class AllPreviousReportsPage extends StatelessWidget {
                   child: ListView.builder(
                       padding: EdgeInsets.only(top: 20, bottom: 30),
                       shrinkWrap: true,
-                      itemCount: oldReports.length + 1,
+                      itemCount: oldReports.length,
                       itemBuilder: (context, reportNumber) {
                         return Card(
                             margin: EdgeInsets.only(top: 10, bottom: 10),
@@ -98,7 +80,7 @@ class AllPreviousReportsPage extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                          'Title: ${appState.getReport(reportNumber ).getTitle()}'),
+                                          'Title: ${appState.getReport(reportNumber).getTitle()}'),
                                       Text(
                                           'Date: ${appState.getReport(reportNumber).getDate()}'),
                                       Text(
