@@ -48,7 +48,9 @@ class AllPreviousReportsPage extends StatelessWidget {
                     children: [
                       Text(
                         'Recent Reports',
-                        style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2.0),
+                        style: DefaultTextStyle.of(context)
+                            .style
+                            .apply(fontSizeFactor: 2.0),
                       ),
                       Card(
                         margin: EdgeInsets.only(top: 10, bottom: 10),
@@ -62,16 +64,16 @@ class AllPreviousReportsPage extends StatelessWidget {
                                   Text.rich(
                                       TextSpan(
                                           text:
-                                          'No reports submitted yet. Return to the home screen and click the ',
+                                              'No reports submitted yet. Return to the home screen and click the ',
                                           children: <TextSpan>[
                                             TextSpan(
                                                 text: 'New Report ',
                                                 style: TextStyle(
                                                     fontWeight:
-                                                    FontWeight.bold)),
+                                                        FontWeight.bold)),
                                             TextSpan(
                                                 text:
-                                                'button at the bottom of the screen to begin!'),
+                                                    'button at the bottom of the screen to begin!'),
                                           ]),
                                       textAlign: TextAlign.center),
                                 ]),
@@ -86,10 +88,9 @@ class AllPreviousReportsPage extends StatelessWidget {
                 child: FractionallySizedBox(
                   widthFactor: 0.85,
                   child: ListView.builder(
-                    padding: EdgeInsets.only(top: 50, bottom: 85),
+                      padding: EdgeInsets.only(top: 50, bottom: 85),
                       shrinkWrap: true,
-                      itemCount:
-                          oldReports.length + 1,
+                      itemCount: oldReports.length + 1,
                       itemBuilder: (context, reportNumber) {
                         if (reportNumber == 0) {
                           return Text(

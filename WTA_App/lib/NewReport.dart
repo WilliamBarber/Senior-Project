@@ -6,8 +6,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 
 class NewReport {
-  static Future<String> submitReport(String title, String description,
-      double severity, String issue, File? imageFile, String date, String time) async {
+  static Future<String> submitReport(
+      String title,
+      String description,
+      double severity,
+      String issue,
+      File? imageFile,
+      String date,
+      String time) async {
     print('');
     print('');
     print('');
@@ -25,7 +31,8 @@ class NewReport {
     await FirebaseAuth.instance.signInAnonymously();
     final storageRef = FirebaseStorage.instance.ref();
     await storageRef.child("$date-$time-$title").putFile(imageFile!);
-    final imageURL = await storageRef.child("$date-$time-$title").getDownloadURL();
+    final imageURL =
+        await storageRef.child("$date-$time-$title").getDownloadURL();
 
     //End Image Submission
 
@@ -35,7 +42,8 @@ class NewReport {
       "severity": severity,
       "issue": issue,
       "image": imageURL,
-      "date": date});
+      "date": date
+    });
 
     await db.collection("issue report").get().then((event) {
       for (var doc in event.docs) {
@@ -45,8 +53,8 @@ class NewReport {
     return imageURL;
   }
 
-  static submitNoImageReport(
-      String title, String description, double severity, String issue, String date, String time) async {
+  static submitNoImageReport(String title, String description, double severity,
+      String issue, String date, String time) async {
     print('');
     print('');
     print('');

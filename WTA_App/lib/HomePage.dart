@@ -24,13 +24,14 @@ class HomePage extends StatelessWidget {
               shrinkWrap: true,
               itemCount: 2,
               itemBuilder: (context, index) {
-                if (index == 0){
+                if (index == 0) {
                   return Text(
                     'Recent Reports',
-                    style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2.0),
+                    style: DefaultTextStyle.of(context)
+                        .style
+                        .apply(fontSizeFactor: 2.0),
                   );
-                }
-                else {
+                } else {
                   return Card(
                     margin: EdgeInsets.only(top: 10, bottom: 10),
                     child: FractionallySizedBox(
@@ -42,15 +43,16 @@ class HomePage extends StatelessWidget {
                             children: [
                               Text.rich(
                                   TextSpan(
-                                      text: 'No reports submitted yet. Click the ',
+                                      text:
+                                          'No reports submitted yet. Click the ',
                                       children: <TextSpan>[
                                         TextSpan(
                                             text: 'New Report ',
-                                            style:
-                                            TextStyle(fontWeight: FontWeight.bold)),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold)),
                                         TextSpan(
                                             text:
-                                            'button at the bottom of the screen to begin!'),
+                                                'button at the bottom of the screen to begin!'),
                                       ]),
                                   textAlign: TextAlign.center),
                             ]),
@@ -69,13 +71,14 @@ class HomePage extends StatelessWidget {
               shrinkWrap: true,
               itemCount: oldReports.length > 3 ? 4 : oldReports.length + 1,
               itemBuilder: (context, index) {
-                if (index == 0){
+                if (index == 0) {
                   return Text(
                     'Recent Reports',
-                    style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2.0),
+                    style: DefaultTextStyle.of(context)
+                        .style
+                        .apply(fontSizeFactor: 2.0),
                   );
-                }
-                else {
+                } else {
                   return Card(
                     margin: EdgeInsets.only(top: 10, bottom: 10),
                     child: FractionallySizedBox(
@@ -86,24 +89,20 @@ class HomePage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                  'Title: ${appState.getReport(index-1)
-                                      .getTitle()}'),
+                                  'Title: ${appState.getReport(index - 1).getTitle()}'),
                               Text(
-                                  'Date: ${appState.getReport(index-1)
-                                      .getDate()}'),
+                                  'Date: ${appState.getReport(index - 1).getDate()}'),
                               Text(
-                                  'Issue Category: ${appState.getReport(
-                                      index-1).getCategory()}'),
+                                  'Issue Category: ${appState.getReport(index - 1).getCategory()}'),
                               ElevatedButton(
                                 child: Text('View Report'),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            OldReportPage(
-                                                report: appState
-                                                    .getReport(index-1))),
+                                        builder: (context) => OldReportPage(
+                                            report:
+                                                appState.getReport(index - 1))),
                                   );
                                 },
                               ),

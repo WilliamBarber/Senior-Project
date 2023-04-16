@@ -108,18 +108,20 @@ class _NewReportPageState extends State<NewReportPage> {
                             onPressed: () async {
                               Navigator.pop(context, 'Yes');
                               DateTime dateTime = DateTime.now();
-                              String date = "${dateTime.day}-${dateTime.month}-${dateTime.year}";
-                              String time = "${dateTime.hour}-${dateTime.minute}-${dateTime.second}";
+                              String date =
+                                  "${dateTime.day}-${dateTime.month}-${dateTime.year}";
+                              String time =
+                                  "${dateTime.hour}-${dateTime.minute}-${dateTime.second}";
                               if (imageFile != null) {
                                 String imageURL = await NewReport.submitReport(
-                                    title,
-                                    description,
-                                    severity,
-                                    issue,
-                                    imageFile,
-                                    date,
-                                    time,
-                                    );
+                                  title,
+                                  description,
+                                  severity,
+                                  issue,
+                                  imageFile,
+                                  date,
+                                  time,
+                                );
                                 appState.addReport(OldReport(
                                     title,
                                     date,
@@ -129,8 +131,8 @@ class _NewReportPageState extends State<NewReportPage> {
                                     'test location',
                                     imageURL));
                               } else {
-                                NewReport.submitNoImageReport(
-                                    title, description, severity, issue, date, time);
+                                NewReport.submitNoImageReport(title,
+                                    description, severity, issue, date, time);
                                 appState.addReport(OldReport.noPhotos(
                                     title,
                                     date,
