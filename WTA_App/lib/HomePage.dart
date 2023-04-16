@@ -78,14 +78,14 @@ class HomePage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                  'Title: ${appState.getReport(reportNumber)
+                                  'Title: ${appState.getReport(reportNumber-1)
                                       .getTitle()}'),
                               Text(
-                                  'Date: ${appState.getReport(reportNumber)
+                                  'Date: ${appState.getReport(reportNumber-1)
                                       .getDate()}'),
                               Text(
                                   'Issue Category: ${appState.getReport(
-                                      reportNumber).getCategory()}'),
+                                      reportNumber-1).getCategory()}'),
                               ElevatedButton(
                                 child: Text('View Report'),
                                 onPressed: () {
@@ -95,7 +95,7 @@ class HomePage extends StatelessWidget {
                                         builder: (context) =>
                                             OldReportPage(
                                                 report: appState
-                                                    .getReport(reportNumber))),
+                                                    .getReport(reportNumber-1))),
                                   );
                                 },
                               ),
