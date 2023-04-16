@@ -55,7 +55,33 @@ class MyHomePage extends StatelessWidget {
           ],
           selectedIndex: selectedIndex,
           onDestinationSelected: (index) {
-            appState.setPage(index);
+            if ((index == 0 || index == 2) && selectedIndex == 1) {
+              showDialog<String>(
+                context: context,
+                builder: (BuildContext context) =>
+                    AlertDialog(
+                      title: const Text('Cancel Report?'),
+                      content: const Text(
+                          'Cancel report and go to the selected screen?'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'No'),
+                          child: const Text('No'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context, 'Yes');
+                            appState.setPage(index);
+                          },
+                          child: const Text('Yes'),
+                        ),
+                      ],
+                    ),
+              );
+            }
+            else {
+              appState.setPage(index);
+            }
           },
         ),
         floatingActionButton: FloatingActionButton.extended(
