@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Center(
         child: Text(
-          'Previous Reports:',
+          'Recent Reports:',
           style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2.0),
         ),
       ),
