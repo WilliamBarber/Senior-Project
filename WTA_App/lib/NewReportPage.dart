@@ -107,6 +107,7 @@ class _NewReportPageState extends State<NewReportPage> {
                           TextButton(
                             onPressed: () async {
                               Navigator.pop(context, 'Yes');
+                              appState.setPage(0);
                               DateTime dateTime = DateTime.now();
                               String date =
                                   "${dateTime.day}-${dateTime.month}-${dateTime.year}";
@@ -141,12 +142,6 @@ class _NewReportPageState extends State<NewReportPage> {
                                     severity,
                                     'test location'));
                               }
-
-                              appState.setPage(0);
-                              // final snackBar = SnackBar(
-                              //   content: Text('Report Successfully Submitted!'),
-                              // );
-                              //ScaffoldMessenger.of(context).showSnackBar(snackBar);
                             },
                             child: const Text('Yes'),
                           ),
@@ -190,7 +185,7 @@ class _NewReportPageState extends State<NewReportPage> {
   }
 
   _getFromGallery() async {
-    XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    XFile? image = await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
     if (image != null) {
       imageFile = File(image.path);
     }
@@ -198,7 +193,7 @@ class _NewReportPageState extends State<NewReportPage> {
   }
 
   _getFromCamera() async {
-    XFile? image = await _picker.pickImage(source: ImageSource.camera);
+    XFile? image = await _picker.pickImage(source: ImageSource.camera, imageQuality: 50);
     if (image != null) {
       setState(() {
         imageFile = File(image.path);
