@@ -20,6 +20,7 @@ class PhotoViewer extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.network(photoURL),
+                        Text('Photo may take a moment to load.'),
                         ElevatedButton(
                           onPressed: () {
                             Navigator.pop(context);

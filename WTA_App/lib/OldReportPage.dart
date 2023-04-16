@@ -44,7 +44,7 @@ class OldReportPage extends StatelessWidget {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: Text('Return to home page'),
+                          child: Text('Return to previous page'),
                         ),
                       ])),
             ),

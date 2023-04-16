@@ -7,6 +7,8 @@ import 'OldReportPage.dart';
 //TODO: required/optional fields
 //TODO: authentication
 //TODO: generate old reports list from firebase instead of only from locally stored files from the current session
+//TODO: Formatting (i.e. wordwrap, centering, etc.)
+//TODO: Multiple photos?
 
 class HomePage extends StatelessWidget {
   @override
