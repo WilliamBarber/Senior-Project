@@ -49,7 +49,6 @@ class HomePage extends StatelessWidget {
           child: FractionallySizedBox(
             widthFactor: 0.85,
             child: ListView.builder(
-                reverse: true,
                 shrinkWrap: true,
                 itemCount: oldReports.length > 3 ? 3 : oldReports.length,
                 itemBuilder: (context, reportNumber) {
