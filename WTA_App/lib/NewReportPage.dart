@@ -151,7 +151,6 @@ class _NewReportPageState extends State<NewReportPage> {
                     child: Text('Submit Report'),
                   ),
                   ElevatedButton(
-                    //TODO: Make the button or text red
                     onPressed: () => showDialog<String>(
                       context: context,
                       builder: (BuildContext context) => AlertDialog(

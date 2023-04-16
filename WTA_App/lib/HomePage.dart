@@ -9,6 +9,8 @@ import 'OldReportPage.dart';
 //TODO: generate old reports list from firebase instead of only from locally stored files from the current session
 //TODO: Formatting (i.e. wordwrap, centering, etc.)
 //TODO: Multiple photos?
+//TODO: Allow scrolling on New Report page (probably using listview hack that I used on home screen)
+//TODO: Make the cancel report text red
 
 class HomePage extends StatelessWidget {
   @override
