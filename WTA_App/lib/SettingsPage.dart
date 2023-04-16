@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'AllPreviousReportsPage.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -13,7 +14,12 @@ class SettingsPage extends StatelessWidget {
       ),
       ElevatedButton(
         onPressed: () {
-          print('Previous Reports Button Clicked');
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) {
+              return Scaffold(body: AllPreviousReportsPage());
+            }),
+          );
         },
         child: Text('View All Previous Reports'),
       ),

@@ -6,6 +6,7 @@ import 'OldReportPage.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print('wob homepage ${DefaultTextStyle.of(context)}');
     var appState = context.watch<MyAppState>();
     var oldReports = appState.getAllReports();
     if (oldReports.isEmpty) {
@@ -60,8 +61,8 @@ class HomePage extends StatelessWidget {
           child: ListView.builder(
               shrinkWrap: true,
               itemCount: oldReports.length > 3 ? 4 : oldReports.length + 1,
-              itemBuilder: (context, reportNumber) {
-                if (reportNumber == 0){
+              itemBuilder: (context, index) {
+                if (index == 0){
                   return Text(
                     'Recent Reports',
                     style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2.0),
@@ -78,14 +79,14 @@ class HomePage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                  'Title: ${appState.getReport(reportNumber-1)
+                                  'Title: ${appState.getReport(index-1)
                                       .getTitle()}'),
                               Text(
-                                  'Date: ${appState.getReport(reportNumber-1)
+                                  'Date: ${appState.getReport(index-1)
                                       .getDate()}'),
                               Text(
                                   'Issue Category: ${appState.getReport(
-                                      reportNumber-1).getCategory()}'),
+                                      index-1).getCategory()}'),
                               ElevatedButton(
                                 child: Text('View Report'),
                                 onPressed: () {
@@ -95,7 +96,7 @@ class HomePage extends StatelessWidget {
                                         builder: (context) =>
                                             OldReportPage(
                                                 report: appState
-                                                    .getReport(reportNumber-1))),
+                                                    .getReport(index-1))),
                                   );
                                 },
                               ),
