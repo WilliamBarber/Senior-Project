@@ -6,7 +6,6 @@ import 'OldReportPage.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print('wob homepage ${DefaultTextStyle.of(context)}');
     var appState = context.watch<MyAppState>();
     var oldReports = appState.getAllReports();
     if (oldReports.isEmpty) {

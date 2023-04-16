@@ -62,7 +62,6 @@ class _NewReportPageState extends State<NewReportPage> {
                   Text('LOCATION HERE'),
                   ElevatedButton(
                     onPressed: () {
-                      print('Photos Button Clicked');
                       showModalBottomSheet<void>(
                         context: context,
                         builder: (BuildContext context) {
@@ -108,16 +107,20 @@ class _NewReportPageState extends State<NewReportPage> {
                           TextButton(
                             onPressed: () async {
                               Navigator.pop(context, 'Yes');
+                              DateTime dateTime = DateTime.now();
+                              String date = "${dateTime.day}-${dateTime.month}-${dateTime.year}";
                               if (imageFile != null) {
                                 String imageURL = await NewReport.submitReport(
                                     title,
                                     description,
                                     severity,
                                     issue,
-                                    imageFile);
+                                    imageFile,
+                                    date,
+                                    );
                                 appState.addReport(OldReport(
                                     title,
-                                    '31 March',
+                                    date,
                                     issue,
                                     description,
                                     severity,
@@ -125,10 +128,10 @@ class _NewReportPageState extends State<NewReportPage> {
                                     imageURL));
                               } else {
                                 NewReport.submitNoImageReport(
-                                    title, description, severity, issue);
+                                    title, description, severity, issue, date);
                                 appState.addReport(OldReport.noPhotos(
                                     title,
-                                    '31 March',
+                                    date,
                                     issue,
                                     description,
                                     severity,

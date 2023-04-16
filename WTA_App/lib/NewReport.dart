@@ -7,7 +7,7 @@ import 'firebase_options.dart';
 
 class NewReport {
   static Future<String> submitReport(String title, String description,
-      double severity, String issue, File? imageFile) async {
+      double severity, String issue, File? imageFile, String date) async {
     print('');
     print('');
     print('');
@@ -29,18 +29,13 @@ class NewReport {
 
     //End Image Submission
 
-    // Create a new report with Description, Title, Severity, Issue type, and Image URL
-    final report = <String, dynamic>{
-      "title": title,
+    // Add a new document with a specified ID
+    db.collection("issue report").doc("test_id").set({"title": title,
       "description": description,
       "severity": severity,
       "issue": issue,
       "image": imageURL,
-    };
-
-    // Add a new document with a generated ID
-    db.collection("issue report").add(report).then((DocumentReference doc) =>
-        print('DocumentSnapshot added with ID: ${doc.id}'));
+      "date": date});
 
     await db.collection("issue report").get().then((event) {
       for (var doc in event.docs) {
@@ -51,7 +46,7 @@ class NewReport {
   }
 
   static submitNoImageReport(
-      String title, String description, double severity, String issue) async {
+      String title, String description, double severity, String issue, String date) async {
     print('');
     print('');
     print('');
@@ -72,6 +67,7 @@ class NewReport {
       "severity": severity,
       "issue": issue,
       "image": 'No Image',
+      "date": date,
     };
 
     // Add a new document with a generated ID
