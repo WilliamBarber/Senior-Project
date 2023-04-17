@@ -22,6 +22,7 @@ class MyAppState extends ChangeNotifier {
 
   void addReport(oldReport) {
     oldReports.insert(0, oldReport);
+    notifyListeners();
   }
 
   OldReport getReport(int reportNumber) {
