@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:35482363477:android:cbd864a5dd5103e89c16dc",
+        "mobilesdk_app_id": "1:35482363477:android:5cf0aa85967e7b389c16dc",
         "android_client_info": {
-          "package_name": "com.example.wta_app"
+          "package_name": "com.WilliamTrailApp.wta_app"
         }
       },
       "oauth_client": [
