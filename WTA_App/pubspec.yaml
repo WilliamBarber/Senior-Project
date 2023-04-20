@@ -41,10 +41,10 @@ dependencies:
   firebase_core: ^2.8.0
   firebase_auth: ^4.4.0
   firebase_ui_auth: ^1.1.17
-  google_maps_flutter: ^2.2.5
   image_picker: ^0.8.7
   firebase_storage: ^11.1.0
   path_provider: ^2.0.14
+  mapbox_gl: ^0.16.0
 
 dev_dependencies:
   flutter_test:

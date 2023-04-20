@@ -41,7 +41,7 @@ android {
         applicationId "com.WilliamTrailApp.wta_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 20 //changed to 19 because of Firebase integration, 20 because of Google Maps integration
+        minSdkVersion 21 //changed to 19 because of Firebase integration, 21 because of Mapbox integration
         targetSdkVersion flutter.targetSdkVersion
         versionCode 2
         //versionCode flutterVersionCode.toInteger()
@@ -59,6 +59,7 @@ android {
 
     dependencies {
         implementation 'com.android.support:multidex:1.0.3'
+        implementation 'com.mapbox.maps:android:10.12.2'
     }
 }
 
