@@ -7,6 +7,7 @@ import 'SeverityIndicator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:wta_app/OldReport.dart';
 import 'NewReport.dart';
+import 'LocationPage.dart';
 
 String title = "no title";
 String description = 'no description';
@@ -59,7 +60,17 @@ class _NewReportPageState extends State<NewReportPage> {
                     },
                     maxLines: null,
                   ),
-                  Text('LOCATION HERE'),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return Scaffold(body: LocationPage());
+                        }),
+                      );
+                    },
+                    child: Text('Attach Location'),
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       showModalBottomSheet<void>(

@@ -59,7 +59,7 @@ android {
 
     dependencies {
         implementation 'com.android.support:multidex:1.0.3'
-        implementation 'com.mapbox.maps:android:10.12.2'
+        implementation("com.google.android.gms:play-services-location:21.0.1")
     }
 }
 
