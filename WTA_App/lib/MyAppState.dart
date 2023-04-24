@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 class MyAppState extends ChangeNotifier {
-  var current = 0;
+  String userName = 'NoUserNameCreated';
   var oldReports = <OldReport>[];
   var selectedIndex = 0;
   var appInitialized = false;
@@ -16,6 +16,15 @@ class MyAppState extends ChangeNotifier {
   void setPage(int page) {
     selectedIndex = page;
     notifyListeners();
+  }
+
+  void setUserName(String userName){
+    this.userName = userName;
+    notifyListeners();
+  }
+
+  String getUserName(){
+    return userName;
   }
 
   int getPage() {
@@ -74,7 +83,6 @@ class MyAppState extends ChangeNotifier {
 
       var db = FirebaseFirestore.instance;
 
-      //TODO: Make which issue categories to check conditional
       await db.collection("issue report").get().then((event) {
         for (var doc in event.docs) {
           if (!(doc.get("longitude").equals("No Location") || doc.get("image").equals("No Image"))){

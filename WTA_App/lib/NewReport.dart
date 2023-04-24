@@ -7,6 +7,7 @@ import 'firebase_options.dart';
 
 class NewReport {
   static Future<String> submitReport(
+      String userName,
       String title,
       String description,
       double severity,
@@ -16,6 +17,7 @@ class NewReport {
       double longitude,
       String date,
       String time) async {
+
     print('');
     print('');
     print('');
@@ -58,6 +60,7 @@ class NewReport {
   }
 
   static Future<String> submitNoLocationReport(
+      String userName,
       String title,
       String description,
       double severity,
@@ -106,7 +109,7 @@ class NewReport {
     return imageURL;
   }
 
-  static submitNoImageReport(String title, String description, double severity,
+  static submitNoImageReport(String userName, String title, String description, double severity,
       String issue, double latitude,
       double longitude, String date, String time) async {
     print('');
@@ -141,6 +144,7 @@ class NewReport {
   }
 
   static submitNoImageNoLocationReport(
+      String userName,
       String title,
       String description,
       double severity,

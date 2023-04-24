@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'AllPreviousReportsPage.dart';
+import 'UserNamePage.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -29,9 +30,14 @@ class SettingsPage extends StatelessWidget {
               widthFactor: 0.7,
               child: ElevatedButton(
                 onPressed: () {
-                  print('App Permissions Requested from Settings Menu');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return Scaffold(body: UserNamePage());
+                    }),
+                  );
                 },
-                child: Text('Request App Permissions'),
+                child: Text('Add Username'),
               ),
             ),
             FractionallySizedBox(
