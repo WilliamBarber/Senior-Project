@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'MyAppState.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:location/location.dart';
 
@@ -20,6 +18,7 @@ class _LocationPageState extends State<LocationPage> {
   _onMapCreated(MapboxMap mapboxMap) {
     this.map = mapboxMap;
     map?.location.updateSettings(LocationComponentSettings(enabled: true));
+    map?.gestures.updateSettings(GesturesSettings(scrollEnabled: false, pinchPanEnabled: false));
   }
 
   @override
@@ -31,7 +30,6 @@ class _LocationPageState extends State<LocationPage> {
   @override
   Widget build(BuildContext context) {
     //TODO: stop making this hard-coded in
-    //TODO: add permissions request (await Permission.locationWhenInUse.request();)
     String ACCESS_TOKEN =
         'pk.eyJ1Ijoid2I0OTIiLCJhIjoiY2xncG1hcGJ5MHZ1ODNwbWticWpwdnpjNSJ9.7Np6B2VQQ52s_42friJTOA';
     return Scaffold(
@@ -62,6 +60,7 @@ class _LocationPageState extends State<LocationPage> {
       ),
     );
   }
+  
   Future<LocationData> getCurrentLocation() async {
     print('************location attempt***************');
     final location = Location();
@@ -71,9 +70,9 @@ class _LocationPageState extends State<LocationPage> {
       print("${currentLocation.longitude} : ${currentLocation.longitude}");
       setState(() {
         _location = location.getLocation();
-        map?.setCamera(CameraOptions(
+        map?.flyTo(CameraOptions(
             center: Point(coordinates: Position(currentLocation.longitude as num, currentLocation.latitude as num)).toJson(),
-            zoom: 15.0));
+        ), MapAnimationOptions(duration: 1000, startDelay: 0));
         map?.loadStyleURI(MapboxStyles.OUTDOORS);
       });
     });
