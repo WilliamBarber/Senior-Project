@@ -4,7 +4,7 @@ import 'MyAppState.dart';
 import 'OldReportPage.dart';
 
 
-//TODO: mapping integration
+//TODO: display map in previous reports card (like how photos are done currently)
 //TODO: required/optional fields
 //TODO: authentication
 //TODO: Formatting (i.e. wordwrap, centering, etc.)
@@ -12,6 +12,7 @@ import 'OldReportPage.dart';
 //TODO: Allow scrolling on New Report page (probably using listview hack that I used on home screen)
 //TODO: Make the cancel report text red
 //TODO: user ids for reports???
+//TODO: make app forget entries between submissions!
 
 class HomePage extends StatelessWidget {
   @override

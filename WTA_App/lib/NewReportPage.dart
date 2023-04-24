@@ -77,9 +77,9 @@ class _NewReportPageState extends State<NewReportPage> {
                         context: context,
                         builder: (BuildContext context) {
                           return SizedBox(
-                            height: 200,
+                            height: 78,
                             child: Center(
-                              child: Column(
+                              child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
@@ -88,6 +88,9 @@ class _NewReportPageState extends State<NewReportPage> {
                                       _getFromGallery();
                                     },
                                     child: Text('Pick From File'),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(5),
                                   ),
                                   ElevatedButton(
                                     onPressed: () {
@@ -124,13 +127,17 @@ class _NewReportPageState extends State<NewReportPage> {
                                   "${dateTime.day}-${dateTime.month}-${dateTime.year}";
                               String time =
                                   "${dateTime.hour}-${dateTime.minute}-${dateTime.second}";
-                              if (imageFile != null) {
+                              print("**********************APPSTATE.GETLATITUDE()*****************");
+                              print(appState.getLatitude());
+                              if (imageFile != null && appState.getLatitude() > -1000) {
                                 String imageURL = await NewReport.submitReport(
                                   title,
                                   description,
                                   severity,
                                   issue,
                                   imageFile,
+                                  appState.getLatitude(),
+                                  appState.getLongitude(),
                                   date,
                                   time,
                                 );
@@ -140,19 +147,43 @@ class _NewReportPageState extends State<NewReportPage> {
                                     issue,
                                     description,
                                     severity,
-                                    'test location',
+                                    appState.getLatitude(),
+                                    appState.getLongitude(),
                                     imageURL));
-                              } else {
+                              } else if (imageFile == null && appState.getLatitude() > -1000) {
                                 NewReport.submitNoImageReport(title,
-                                    description, severity, issue, date, time);
+                                    description, severity, issue, appState.getLatitude(), appState.getLongitude(), date, time);
                                 appState.addReport(OldReport.noPhotos(
                                     title,
                                     date,
                                     issue,
                                     description,
                                     severity,
-                                    'test location'));
+                                    appState.getLatitude(),
+                                    appState.getLongitude()));
                               }
+                              else if (imageFile != null && appState.getLatitude() == -1000) {
+                                String imageURL = await NewReport.submitNoLocationReport(title, description, severity, issue, imageFile, date, time);
+                                appState.addReport(OldReport.noLocation(
+                                    title,
+                                    date,
+                                    issue,
+                                    description,
+                                    severity,
+                                    imageURL));
+                              }
+                              else {
+                                NewReport.submitNoImageNoLocationReport(title, description, severity, issue, date, time);
+                                appState.addReport(OldReport.noPhotosNoLocation(
+                                    title,
+                                    date,
+                                    issue,
+                                    description,
+                                    severity));
+                              }
+                              title = "no title";
+                              description = "no description";
+                              appState.setLocationUsed(true);
                             },
                             child: const Text('Yes'),
                           ),

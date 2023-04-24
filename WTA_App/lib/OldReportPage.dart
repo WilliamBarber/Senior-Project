@@ -26,7 +26,8 @@ class OldReportPage extends StatelessWidget {
                         Text('Issue Category: ${report.getCategory()}'),
                         Text('Severity: ${report.getSeverity().toInt()} / 5'),
                         Text('Description: ${report.getDescription()}'),
-                        Text('Location: ${report.getLocation()}'),
+                        Text('Latitude: ${report.getLatitude()}'),
+                        Text('Longitude: ${report.getLongitude()}'),
                         //Text('Photos: ${report.getPhotos()}'),
                         if (report.getPhotos() != 'no photos')
                           ElevatedButton(

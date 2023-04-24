@@ -4,13 +4,18 @@ class OldReport {
   String category = 'no category';
   String description = 'no description';
   double severity = 0;
-  String location = 'no location';
+  double latitude = -1000;
+  double longitude = -1000;
   String photos = 'no photos';
 
   OldReport(this.title, this.date, this.category, this.description,
-      this.severity, this.location, this.photos);
+      this.severity, this.latitude, this.longitude, this.photos);
   OldReport.noPhotos(this.title, this.date, this.category, this.description,
-      this.severity, this.location);
+      this.severity, this.latitude, this.longitude);
+  OldReport.noLocation(this.title, this.date, this.category, this.description,
+      this.severity, this.photos);
+  OldReport.noPhotosNoLocation(this.title, this.date, this.category, this.description,
+      this.severity);
   OldReport.empty();
 
   String getTitle() {
@@ -33,8 +38,12 @@ class OldReport {
     return severity;
   }
 
-  String getLocation() {
-    return location;
+  double getLatitude() {
+    return latitude;
+  }
+
+  double getLongitude() {
+    return longitude;
   }
 
   String getPhotos() {

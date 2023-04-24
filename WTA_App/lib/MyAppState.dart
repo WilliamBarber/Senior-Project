@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'OldReport.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,6 +10,9 @@ class MyAppState extends ChangeNotifier {
   var oldReports = <OldReport>[];
   var selectedIndex = 0;
   var appInitialized = false;
+  bool locationUsed = false;
+  double? latitude = -1000;
+  double? longitude = -1000;
 
   void setPage(int page) {
     selectedIndex = page;
@@ -19,6 +21,32 @@ class MyAppState extends ChangeNotifier {
 
   int getPage() {
     return selectedIndex;
+  }
+
+  void setLocation(double? latitude, double? longitude){
+    print('*********************LATITUDE*********************');
+    print(latitude);
+    this.latitude = latitude;
+    this.longitude = longitude;
+    locationUsed = false;
+  }
+
+  double getLatitude(){
+    if (locationUsed){
+      latitude = -1000;
+    }
+    return latitude!;
+  }
+
+  double getLongitude(){
+    if (locationUsed){
+      longitude = -1000;
+    }
+    return longitude!;
+  }
+
+  void setLocationUsed(bool used){
+    locationUsed = used;
   }
 
   void addReport(oldReport) {
@@ -47,6 +75,7 @@ class MyAppState extends ChangeNotifier {
 
       var db = FirebaseFirestore.instance;
 
+      //TODO: Make which issue categories to check conditional
       await db.collection("issue report").get().then((event) {
         for (var doc in event.docs) {
           addReport(OldReport(
@@ -55,7 +84,8 @@ class MyAppState extends ChangeNotifier {
               doc.get("issue"),
               doc.get("description"),
               doc.get("severity"),
-              'test location',
+              doc.get("latitude"),
+              doc.get("longitude"),
               doc.get("image"))
           );
         }

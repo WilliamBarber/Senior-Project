@@ -12,6 +12,57 @@ class NewReport {
       double severity,
       String issue,
       File? imageFile,
+      double latitude,
+      double longitude,
+      String date,
+      String time) async {
+    print('');
+    print('');
+    print('');
+    print("attempting submission");
+    print('');
+    print('');
+
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+
+    var db = FirebaseFirestore.instance;
+
+    //Start Image Submission
+    await FirebaseAuth.instance.signInAnonymously();
+    final storageRef = FirebaseStorage.instance.ref();
+    await storageRef.child("$date-$time-$title").putFile(imageFile!);
+    final imageURL =
+      await storageRef.child("$date-$time-$title").getDownloadURL();
+
+    //End Image Submission
+
+    db.collection("issue report").doc("$date-$time-$title").set({
+      "title": title,
+      "description": description,
+      "severity": severity,
+      "issue": issue,
+      "image": imageURL,
+      "latitude": latitude,
+      "longitude": longitude,
+      "date": date
+    });
+
+    await db.collection("issue report").get().then((event) {
+      for (var doc in event.docs) {
+        print("${doc.id} => ${doc.data()}");
+      }
+    });
+    return imageURL;
+  }
+
+  static Future<String> submitNoLocationReport(
+      String title,
+      String description,
+      double severity,
+      String issue,
+      File? imageFile,
       String date,
       String time) async {
     print('');
@@ -54,7 +105,8 @@ class NewReport {
   }
 
   static submitNoImageReport(String title, String description, double severity,
-      String issue, String date, String time) async {
+      String issue, double latitude,
+      double longitude, String date, String time) async {
     print('');
     print('');
     print('');
@@ -74,7 +126,44 @@ class NewReport {
       "severity": severity,
       "issue": issue,
       "image": 'No Image',
+      "latitude": latitude,
+      "longitude": longitude,
       "date": date,
+    });
+
+    await db.collection("issue report").get().then((event) {
+      for (var doc in event.docs) {
+        print("${doc.id} => ${doc.data()}");
+      }
+    });
+  }
+
+  static submitNoImageNoLocationReport(
+      String title,
+      String description,
+      double severity,
+      String issue,
+      String date,
+      String time) async {
+    print('');
+    print('');
+    print('');
+    print("attempting submission");
+    print('');
+    print('');
+
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+
+    var db = FirebaseFirestore.instance;
+
+    db.collection("issue report").doc("$date-$time-$title").set({
+      "title": title,
+      "description": description,
+      "severity": severity,
+      "issue": issue,
+      "date": date
     });
 
     await db.collection("issue report").get().then((event) {
