@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'OldReport.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -78,16 +77,52 @@ class MyAppState extends ChangeNotifier {
       //TODO: Make which issue categories to check conditional
       await db.collection("issue report").get().then((event) {
         for (var doc in event.docs) {
-          addReport(OldReport(
-              doc.get("title"),
-              doc.get("date"),
-              doc.get("issue"),
-              doc.get("description"),
-              doc.get("severity"),
-              doc.get("latitude"),
-              doc.get("longitude"),
-              doc.get("image"))
-          );
+          if (!(doc.get("longitude").equals("No Location") || doc.get("image").equals("No Image"))){
+            addReport(OldReport(
+                doc.get("title"),
+                doc.get("date"),
+                doc.get("issue"),
+                doc.get("description"),
+                doc.get("severity"),
+                doc.get("latitude"),
+                doc.get("longitude"),
+                doc.get("image"))
+            );
+          }
+
+          else if (doc.get("longitude").equals("No Location") && !(doc.get("image").equals("No Image"))){
+            addReport(OldReport.noLocation(
+                doc.get("title"),
+                doc.get("date"),
+                doc.get("issue"),
+                doc.get("description"),
+                doc.get("severity"),
+                doc.get("image"))
+            );
+          }
+
+          else if (doc.get("longitude").equals("No Location") && (doc.get("image").equals("No Image"))){
+            addReport(OldReport.noPhotos(
+                doc.get("title"),
+                doc.get("date"),
+                doc.get("issue"),
+                doc.get("description"),
+                doc.get("severity"),
+                doc.get("latitude"),
+                doc.get("longitude"))
+            );
+          }
+
+          else{
+            addReport(OldReport.noPhotosNoLocation(
+                doc.get("title"),
+                doc.get("date"),
+                doc.get("issue"),
+                doc.get("description"),
+                doc.get("severity")),
+            );
+          }
+
         }
       });
     }

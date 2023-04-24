@@ -184,6 +184,7 @@ class _NewReportPageState extends State<NewReportPage> {
                               title = "no title";
                               description = "no description";
                               appState.setLocationUsed(true);
+                              severity = 1;
                             },
                             child: const Text('Yes'),
                           ),
