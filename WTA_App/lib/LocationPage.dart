@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'MyAppState.dart';
@@ -17,6 +15,13 @@ class LocationPage extends StatefulWidget {
 class _LocationPageState extends State<LocationPage> {
   late Future<LocationData> _location;
 
+  MapboxMap? map;
+
+  _onMapCreated(MapboxMap mapboxMap) {
+    this.map = mapboxMap;
+    map?.location.updateSettings(LocationComponentSettings(enabled: true));
+  }
+
   @override
   void initState(){
     super.initState();
@@ -25,8 +30,6 @@ class _LocationPageState extends State<LocationPage> {
 
   @override
   Widget build(BuildContext context) {
-    var appState = context.watch<MyAppState>();
-
     //TODO: stop making this hard-coded in
     //TODO: add permissions request (await Permission.locationWhenInUse.request();)
     String ACCESS_TOKEN =
@@ -40,26 +43,22 @@ class _LocationPageState extends State<LocationPage> {
       body: FutureBuilder<LocationData>(
         future: _location,
         builder: (BuildContext context, AsyncSnapshot<LocationData> snapshot) {
-          if (!snapshot.hasData){
+          if (!snapshot.hasData) {
             return Center(
               child: Text('Loading, please wait...'),
             );
           }
-          else{
+          else {
             final currentLocation = snapshot.data;
-            return Center(
-              child: ListView(
-                children: [
-                  /*MapWidget(
-                      resourceOptions: ResourceOptions(accessToken: ACCESS_TOKEN),
-                    cameraOptions: CameraOptions(center: Point(coordinates: Position(-80.1263, 25.7845)).toJson(),),
-                  ),*/
-                  Text('Location: ${currentLocation?.latitude}, ${currentLocation?.longitude}'),
-                ],
-              )
+            return MapWidget(
+              key: ValueKey("mapWidget"),
+              resourceOptions: ResourceOptions(accessToken: ACCESS_TOKEN),
+               cameraOptions: CameraOptions(center: Point(coordinates: Position(currentLocation?.longitude as num, currentLocation?.latitude as num)).toJson(), zoom: 15.0),
+               styleUri: MapboxStyles.OUTDOORS,
+               onMapCreated: _onMapCreated,
             );
           }
-        },
+        }
       ),
     );
   }
@@ -72,6 +71,10 @@ class _LocationPageState extends State<LocationPage> {
       print("${currentLocation.longitude} : ${currentLocation.longitude}");
       setState(() {
         _location = location.getLocation();
+        map?.setCamera(CameraOptions(
+            center: Point(coordinates: Position(currentLocation.longitude as num, currentLocation.latitude as num)).toJson(),
+            zoom: 15.0));
+        map?.loadStyleURI(MapboxStyles.OUTDOORS);
       });
     });
     return currentLocation;
