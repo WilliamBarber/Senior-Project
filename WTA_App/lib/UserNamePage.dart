@@ -38,6 +38,7 @@ class UserNamePage extends StatelessWidget {
             ElevatedButton(
                 onPressed: () {
                   appState.setUserName(tempUserName);
+                  appState.refreshOldReports();
                 },
                 child: Text('Submit New Username')),
           ]),

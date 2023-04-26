@@ -73,64 +73,68 @@ class MyAppState extends ChangeNotifier {
     return oldReports;
   }
 
-  initializeOldReports(BuildContext context) async {
-    if (!appInitialized) {
-      appInitialized = true;
+  void refreshOldReports() async{
+    oldReports.clear();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
-      await Firebase.initializeApp(
-        options: DefaultFirebaseOptions.currentPlatform,
-      );
+    var db = FirebaseFirestore.instance;
 
-      var db = FirebaseFirestore.instance;
-
-      await db.collection("issue report").get().then((event) {
-        for (var doc in event.docs) {
-          print("******************USERNAME COMPARISON**********************");
-          print(doc.get("userName") + "  " + userName);
-          if (doc.get("userName") == userName) {
-            if (!(doc.get("longitude").toString() == ("No Location") ||
-                doc.get("image").toString() == ("No Image"))) {
-              addReport(OldReport(
+    await db.collection("issue report").get().then((event) {
+      for (var doc in event.docs) {
+        print(doc.get("userName") + "  " + userName);
+        if (doc.get("userName") == userName) {
+          if (!(doc.get("longitude").toString() == ("No Location") ||
+              doc.get("image").toString() == ("No Image"))) {
+            addReport(OldReport(
+                doc.get("title"),
+                doc.get("date"),
+                doc.get("issue"),
+                doc.get("description"),
+                doc.get("severity"),
+                doc.get("latitude"),
+                doc.get("longitude"),
+                doc.get("image")));
+          } else if (doc.get("longitude").toString() == ("No Location") &&
+              !(doc.get("image").toString() == ("No Image"))) {
+            addReport(OldReport.noLocation(
+                doc.get("title"),
+                doc.get("date"),
+                doc.get("issue"),
+                doc.get("description"),
+                doc.get("severity"),
+                doc.get("image")));
+          } else if (doc.get("longitude").toString() == ("No Location") &&
+              !(doc.get("image").toString() == ("No Image"))) {
+            addReport(OldReport.noPhotos(
+                doc.get("title"),
+                doc.get("date"),
+                doc.get("issue"),
+                doc.get("description"),
+                doc.get("severity"),
+                doc.get("latitude"),
+                doc.get("longitude")));
+          } else {
+            addReport(
+              OldReport.noPhotosNoLocation(
                   doc.get("title"),
                   doc.get("date"),
                   doc.get("issue"),
                   doc.get("description"),
-                  doc.get("severity"),
-                  doc.get("latitude"),
-                  doc.get("longitude"),
-                  doc.get("image")));
-            } else if (doc.get("longitude").toString() == ("No Location") &&
-                !(doc.get("image").toString() == ("No Image"))) {
-              addReport(OldReport.noLocation(
-                  doc.get("title"),
-                  doc.get("date"),
-                  doc.get("issue"),
-                  doc.get("description"),
-                  doc.get("severity"),
-                  doc.get("image")));
-            } else if (doc.get("longitude").toString() == ("No Location") &&
-                !(doc.get("image").toString() == ("No Image"))) {
-              addReport(OldReport.noPhotos(
-                  doc.get("title"),
-                  doc.get("date"),
-                  doc.get("issue"),
-                  doc.get("description"),
-                  doc.get("severity"),
-                  doc.get("latitude"),
-                  doc.get("longitude")));
-            } else {
-              addReport(
-                OldReport.noPhotosNoLocation(
-                    doc.get("title"),
-                    doc.get("date"),
-                    doc.get("issue"),
-                    doc.get("description"),
-                    doc.get("severity")),
-              );
-            }
+                  doc.get("severity")),
+            );
           }
         }
-      });
+      }
+    });
+    notifyListeners();
+  }
+
+  void initializeOldReports(BuildContext context) async {
+    if (!appInitialized) {
+      appInitialized = true;
+      refreshOldReports();
     }
     notifyListeners();
   }

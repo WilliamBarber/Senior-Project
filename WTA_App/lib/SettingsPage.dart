@@ -37,7 +37,7 @@ class SettingsPage extends StatelessWidget {
                     }),
                   );
                 },
-                child: Text('Add Username'),
+                child: Text('Change Account'),
               ),
             ),
             FractionallySizedBox(
