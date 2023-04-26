@@ -41,6 +41,7 @@ class NewReport {
     //End Image Submission
 
     db.collection("issue report").doc("$date-$time-$title").set({
+      "userName": userName,
       "title": title,
       "description": description,
       "severity": severity,
@@ -91,6 +92,7 @@ class NewReport {
     //End Image Submission
 
     db.collection("issue report").doc("$date-$time-$title").set({
+      "userName": userName,
       "title": title,
       "description": description,
       "severity": severity,
@@ -109,7 +111,8 @@ class NewReport {
     return imageURL;
   }
 
-  static submitNoImageReport(String userName, String title, String description, double severity,
+  static submitNoImageReport(String userName,
+      String title, String description, double severity,
       String issue, double latitude,
       double longitude, String date, String time) async {
     print('');
@@ -126,6 +129,7 @@ class NewReport {
     var db = FirebaseFirestore.instance;
 
     db.collection("issue report").doc("$date-$time-$title").set({
+      "userName": userName,
       "title": title,
       "description": description,
       "severity": severity,
@@ -165,6 +169,7 @@ class NewReport {
     var db = FirebaseFirestore.instance;
 
     db.collection("issue report").doc("$date-$time-$title").set({
+      "userName": userName,
       "title": title,
       "description": description,
       "severity": severity,

@@ -18,12 +18,12 @@ class MyAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setUserName(String userName){
+  void setUserName(String userName) {
     this.userName = userName;
     notifyListeners();
   }
 
-  String getUserName(){
+  String getUserName() {
     return userName;
   }
 
@@ -31,7 +31,7 @@ class MyAppState extends ChangeNotifier {
     return selectedIndex;
   }
 
-  void setLocation(double? latitude, double? longitude){
+  void setLocation(double? latitude, double? longitude) {
     print('*********************LATITUDE*********************');
     print(latitude);
     this.latitude = latitude;
@@ -39,21 +39,21 @@ class MyAppState extends ChangeNotifier {
     locationUsed = false;
   }
 
-  double getLatitude(){
-    if (locationUsed){
+  double getLatitude() {
+    if (locationUsed) {
       latitude = -1000;
     }
     return latitude!;
   }
 
-  double getLongitude(){
-    if (locationUsed){
+  double getLongitude() {
+    if (locationUsed) {
       longitude = -1000;
     }
     return longitude!;
   }
 
-  void setLocationUsed(bool used){
+  void setLocationUsed(bool used) {
     locationUsed = used;
   }
 
@@ -85,52 +85,50 @@ class MyAppState extends ChangeNotifier {
 
       await db.collection("issue report").get().then((event) {
         for (var doc in event.docs) {
-          if (!(doc.get("longitude").equals("No Location") || doc.get("image").equals("No Image"))){
-            addReport(OldReport(
-                doc.get("title"),
-                doc.get("date"),
-                doc.get("issue"),
-                doc.get("description"),
-                doc.get("severity"),
-                doc.get("latitude"),
-                doc.get("longitude"),
-                doc.get("image"))
-            );
+          print("******************USERNAME COMPARISON**********************");
+          print(doc.get("userName") + "  " + userName);
+          if (doc.get("userName") == userName) {
+            if (!(doc.get("longitude").toString() == ("No Location") ||
+                doc.get("image").toString() == ("No Image"))) {
+              addReport(OldReport(
+                  doc.get("title"),
+                  doc.get("date"),
+                  doc.get("issue"),
+                  doc.get("description"),
+                  doc.get("severity"),
+                  doc.get("latitude"),
+                  doc.get("longitude"),
+                  doc.get("image")));
+            } else if (doc.get("longitude").toString() == ("No Location") &&
+                !(doc.get("image").toString() == ("No Image"))) {
+              addReport(OldReport.noLocation(
+                  doc.get("title"),
+                  doc.get("date"),
+                  doc.get("issue"),
+                  doc.get("description"),
+                  doc.get("severity"),
+                  doc.get("image")));
+            } else if (doc.get("longitude").toString() == ("No Location") &&
+                !(doc.get("image").toString() == ("No Image"))) {
+              addReport(OldReport.noPhotos(
+                  doc.get("title"),
+                  doc.get("date"),
+                  doc.get("issue"),
+                  doc.get("description"),
+                  doc.get("severity"),
+                  doc.get("latitude"),
+                  doc.get("longitude")));
+            } else {
+              addReport(
+                OldReport.noPhotosNoLocation(
+                    doc.get("title"),
+                    doc.get("date"),
+                    doc.get("issue"),
+                    doc.get("description"),
+                    doc.get("severity")),
+              );
+            }
           }
-
-          else if (doc.get("longitude").equals("No Location") && !(doc.get("image").equals("No Image"))){
-            addReport(OldReport.noLocation(
-                doc.get("title"),
-                doc.get("date"),
-                doc.get("issue"),
-                doc.get("description"),
-                doc.get("severity"),
-                doc.get("image"))
-            );
-          }
-
-          else if (doc.get("longitude").equals("No Location") && (doc.get("image").equals("No Image"))){
-            addReport(OldReport.noPhotos(
-                doc.get("title"),
-                doc.get("date"),
-                doc.get("issue"),
-                doc.get("description"),
-                doc.get("severity"),
-                doc.get("latitude"),
-                doc.get("longitude"))
-            );
-          }
-
-          else{
-            addReport(OldReport.noPhotosNoLocation(
-                doc.get("title"),
-                doc.get("date"),
-                doc.get("issue"),
-                doc.get("description"),
-                doc.get("severity")),
-            );
-          }
-
         }
       });
     }

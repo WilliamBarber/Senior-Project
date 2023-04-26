@@ -131,6 +131,7 @@ class _NewReportPageState extends State<NewReportPage> {
                               print(appState.getLatitude());
                               if (imageFile != null && appState.getLatitude() > -1000) {
                                 String imageURL = await NewReport.submitReport(
+                                  appState.getUserName(),
                                   title,
                                   description,
                                   severity,
@@ -151,7 +152,7 @@ class _NewReportPageState extends State<NewReportPage> {
                                     appState.getLongitude(),
                                     imageURL));
                               } else if (imageFile == null && appState.getLatitude() > -1000) {
-                                NewReport.submitNoImageReport(title,
+                                NewReport.submitNoImageReport(appState.getUserName(), title,
                                     description, severity, issue, appState.getLatitude(), appState.getLongitude(), date, time);
                                 appState.addReport(OldReport.noPhotos(
                                     title,
@@ -163,7 +164,7 @@ class _NewReportPageState extends State<NewReportPage> {
                                     appState.getLongitude()));
                               }
                               else if (imageFile != null && appState.getLatitude() == -1000) {
-                                String imageURL = await NewReport.submitNoLocationReport(title, description, severity, issue, imageFile, date, time);
+                                String imageURL = await NewReport.submitNoLocationReport(appState.getUserName(), title, description, severity, issue, imageFile, date, time);
                                 appState.addReport(OldReport.noLocation(
                                     title,
                                     date,
@@ -173,7 +174,7 @@ class _NewReportPageState extends State<NewReportPage> {
                                     imageURL));
                               }
                               else {
-                                NewReport.submitNoImageNoLocationReport(title, description, severity, issue, date, time);
+                                NewReport.submitNoImageNoLocationReport(appState.getUserName(), title, description, severity, issue, date, time);
                                 appState.addReport(OldReport.noPhotosNoLocation(
                                     title,
                                     date,
