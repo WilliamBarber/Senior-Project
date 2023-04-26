@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'AllPreviousReportsPage.dart';
 import 'UserNamePage.dart';
+import 'AboutThisAppPage.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -44,7 +45,12 @@ class SettingsPage extends StatelessWidget {
               widthFactor: 0.7,
               child: ElevatedButton(
                 onPressed: () {
-                  print('About App Button Clicked');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return Scaffold(body: AboutThisAppPage());
+                    }),
+                  );
                 },
                 child: Text('About This App'),
               ),
