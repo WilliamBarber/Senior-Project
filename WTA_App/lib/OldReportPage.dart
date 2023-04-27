@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'MapViewerPage.dart';
 import 'OldReport.dart';
 import 'PhotoViewer.dart';
 
@@ -30,15 +31,31 @@ class OldReportPage extends StatelessWidget {
                           Text('Latitude: ${report.getLatitude()}'),
                         if (report.getLongitude() != -1000)
                           Text('Longitude: ${report.getLongitude()}'),
-                        if (report.getPhotos() != 'no photos')
+                        if (report.getLatitude() != -1000)
                           ElevatedButton(
-                            child: Text('View Photos'),
+                            child: Text('View Location'),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) {
+                                  return Scaffold(
+                                      body: MapViewerPage(
+                                    latitude: report.getLatitude(),
+                                    longitude: report.getLongitude(),
+                                  ));
+                                }),
+                              );
+                            },
+                          ),
+                        if (report.getImage() != 'no image')
+                          ElevatedButton(
+                            child: Text('View Image'),
                             onPressed: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => PhotoViewer(
-                                        photoURL: report.getPhotos())),
+                                        photoURL: report.getImage())),
                               );
                             },
                           ),

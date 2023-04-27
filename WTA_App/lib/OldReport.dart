@@ -7,15 +7,15 @@ class OldReport {
   double severity = 0;
   double latitude = -1000;
   double longitude = -1000;
-  String photos = 'no photos';
+  String image = 'no image';
 
   OldReport(this.title, this.trailhead, this.date, this.category, this.description,
-      this.severity, this.latitude, this.longitude, this.photos);
-  OldReport.noPhotos(this.title, this.trailhead, this.date, this.category, this.description,
+      this.severity, this.latitude, this.longitude, this.image);
+  OldReport.noImage(this.title, this.trailhead, this.date, this.category, this.description,
       this.severity, this.latitude, this.longitude);
   OldReport.noLocation(this.title, this.trailhead, this.date, this.category, this.description,
-      this.severity, this.photos);
-  OldReport.noPhotosNoLocation(
+      this.severity, this.image);
+  OldReport.noImageNoLocation(
       this.title, this.trailhead, this.date, this.category, this.description, this.severity);
   OldReport.empty();
 
@@ -51,7 +51,7 @@ class OldReport {
     return longitude;
   }
 
-  String getPhotos() {
-    return photos;
+  String getImage() {
+    return image;
   }
 }

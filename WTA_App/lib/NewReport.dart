@@ -88,8 +88,8 @@ class NewReport {
       "severity": severity,
       "issue": issue,
       "image": imageURL,
-      "latitude": "No Location",
-      "longitude": "No location",
+      "latitude": "no location",
+      "longitude": "no location",
       "date": date
     });
 
@@ -128,7 +128,7 @@ class NewReport {
       "description": description,
       "severity": severity,
       "issue": issue,
-      "image": 'No Image',
+      "image": 'no image',
       "latitude": latitude,
       "longitude": longitude,
       "date": date,
@@ -166,9 +166,9 @@ class NewReport {
       "description": description,
       "severity": severity,
       "issue": issue,
-      "image": "No Image",
-      "latitude": "No Location",
-      "longitude": "No Location",
+      "image": "no image",
+      "latitude": "no location",
+      "longitude": "no location",
       "date": date
     });
 

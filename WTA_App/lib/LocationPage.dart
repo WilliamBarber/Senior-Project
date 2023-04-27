@@ -20,7 +20,7 @@ class _LocationPageState extends State<LocationPage> {
     this.map = mapboxMap;
     map?.location.updateSettings(LocationComponentSettings(enabled: true));
     map?.gestures.updateSettings(
-        GesturesSettings(scrollEnabled: false, pinchPanEnabled: false));
+        GesturesSettings(scrollEnabled: false, pinchPanEnabled: false, pitchEnabled: false));
   }
 
   @override

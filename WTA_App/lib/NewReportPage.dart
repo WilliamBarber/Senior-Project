@@ -31,69 +31,77 @@ class _NewReportPageState extends State<NewReportPage> {
         shrinkWrap: true,
         children: [
           FractionallySizedBox(
-          widthFactor: 0.85,
-        child: Text(
-            style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2.0),
-            'New Report Submission'),
-      ),
-
+            widthFactor: 0.85,
+            child: Text(
+                style: DefaultTextStyle.of(context)
+                    .style
+                    .apply(fontSizeFactor: 2.0),
+                'New Report Submission'),
+          ),
           Center(
-            child:
-              Card(
-                margin: EdgeInsets.only(top: 10, bottom: 10),
-                child: FractionallySizedBox(
-                  widthFactor: 0.85,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                                style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.7),
-                                'Title:'),
-                            TextField(
-                              textCapitalization: TextCapitalization.words,
-                              decoration: const InputDecoration(
-                                border: UnderlineInputBorder(),
-                                labelText: 'Enter a Title for Your Report',
-                              ),
-                              onChanged: (text) {
-                                title = text;
-                              },
+            child: Card(
+              margin: EdgeInsets.only(top: 10, bottom: 10),
+              child: FractionallySizedBox(
+                widthFactor: 0.85,
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                              style: DefaultTextStyle.of(context)
+                                  .style
+                                  .apply(fontSizeFactor: 1.7),
+                              'Title:'),
+                          TextField(
+                            textCapitalization: TextCapitalization.words,
+                            decoration: const InputDecoration(
+                              border: UnderlineInputBorder(),
+                              labelText: 'Enter a Title for Your Report',
                             ),
-                            Padding(padding: EdgeInsets.only(top: 10.0, bottom: 10.0),),
-                            Text(
-                                style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.7),
-                                'Details:'),
-                            TextField(
-                              textCapitalization: TextCapitalization.words,
-                              decoration: const InputDecoration(
-                                border: UnderlineInputBorder(),
-                                labelText: 'Enter the Trailhead Name',
-                              ),
-                              onChanged: (text) {
-                                trailhead = text;
-                              },
-                            ),
-                          ],
-                        ),
-                        DropDownButton(),
-                        SeverityIndicator(),
-                        TextField(
-                          textCapitalization: TextCapitalization.sentences,
-                          decoration: const InputDecoration(
-                            labelText: 'Enter a Description for Your Report',
+                            onChanged: (text) {
+                              title = text;
+                            },
                           ),
-                          onChanged: (text) {
-                            description = text;
-                          },
-                          maxLines: null,
+                          Padding(
+                            padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                          ),
+                          Text(
+                              style: DefaultTextStyle.of(context)
+                                  .style
+                                  .apply(fontSizeFactor: 1.7),
+                              'Details:'),
+                          TextField(
+                            textCapitalization: TextCapitalization.words,
+                            decoration: const InputDecoration(
+                              border: UnderlineInputBorder(),
+                              labelText: 'Enter the Trailhead Name',
+                            ),
+                            onChanged: (text) {
+                              trailhead = text;
+                            },
+                          ),
+                        ],
+                      ),
+                      DropDownButton(),
+                      SeverityIndicator(),
+                      TextField(
+                        textCapitalization: TextCapitalization.sentences,
+                        decoration: const InputDecoration(
+                          labelText: 'Enter a Description for Your Report',
                         ),
-                        ElevatedButton(
+                        onChanged: (text) {
+                          description = text;
+                        },
+                        maxLines: null,
+                      ),
+                      FractionallySizedBox(
+                        widthFactor: 0.47,
+                        child: ElevatedButton(
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -104,7 +112,10 @@ class _NewReportPageState extends State<NewReportPage> {
                           },
                           child: Text('Attach Location'),
                         ),
-                        ElevatedButton(
+                      ),
+                      FractionallySizedBox(
+                        widthFactor: 0.47,
+                        child: ElevatedButton(
                           onPressed: () {
                             showModalBottomSheet<void>(
                               context: context,
@@ -139,9 +150,14 @@ class _NewReportPageState extends State<NewReportPage> {
                               },
                             );
                           },
-                          child: Text('Attach Photos'),
+                          child: imageFile == null
+                              ? Text('Attach Image')
+                              : Text('Replace Image'),
                         ),
-                        ElevatedButton(
+                      ),
+                      FractionallySizedBox(
+                        widthFactor: 0.47,
+                        child: ElevatedButton(
                           onPressed: () => showDialog<String>(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
@@ -201,7 +217,7 @@ class _NewReportPageState extends State<NewReportPage> {
                                           appState.getLongitude(),
                                           date,
                                           time);
-                                      appState.addReport(OldReport.noPhotos(
+                                      appState.addReport(OldReport.noImage(
                                           title,
                                           trailhead,
                                           date,
@@ -242,7 +258,7 @@ class _NewReportPageState extends State<NewReportPage> {
                                           date,
                                           time);
                                       appState.addReport(
-                                          OldReport.noPhotosNoLocation(
+                                          OldReport.noImageNoLocation(
                                               title,
                                               trailhead,
                                               date,
@@ -263,7 +279,10 @@ class _NewReportPageState extends State<NewReportPage> {
                           ),
                           child: Text('Submit Report'),
                         ),
-                        ElevatedButton(
+                      ),
+                      FractionallySizedBox(
+                        widthFactor: 0.47,
+                        child: ElevatedButton(
                           onPressed: () => showDialog<String>(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
@@ -287,11 +306,12 @@ class _NewReportPageState extends State<NewReportPage> {
                           ),
                           child: Text('Cancel Report'),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
+            ),
           ),
         ],
       ),
@@ -305,6 +325,7 @@ class _NewReportPageState extends State<NewReportPage> {
       imageFile = File(image.path);
     }
     print('image selected from file');
+    Navigator.pop(context);
   }
 
   _getFromCamera() async {
@@ -316,5 +337,6 @@ class _NewReportPageState extends State<NewReportPage> {
       });
     }
     print('image selected from camera');
+    Navigator.pop(context);
   }
 }

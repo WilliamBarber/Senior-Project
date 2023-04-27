@@ -76,10 +76,9 @@ class MyAppState extends ChangeNotifier {
 
     await db.collection("issue report").get().then((event) {
       for (var doc in event.docs) {
-        print(doc.get("userName") + "  " + userName);
         if (doc.get("userName") == userName) {
-          if (!(doc.get("longitude").toString() == ("No Location") ||
-              doc.get("image").toString() == ("No Image"))) {
+          if (!(doc.get("longitude").toString() == ("no location") ||
+              doc.get("image").toString() == ("no image"))) {
             addReport(OldReport(
                 doc.get("title"),
                 doc.get("trailhead"),
@@ -90,8 +89,8 @@ class MyAppState extends ChangeNotifier {
                 doc.get("latitude"),
                 doc.get("longitude"),
                 doc.get("image")));
-          } else if (doc.get("longitude").toString() == ("No Location") &&
-              !(doc.get("image").toString() == ("No Image"))) {
+          } else if (doc.get("longitude").toString() == ("no location") &&
+              (doc.get("image").toString() != ("no image"))) {
             addReport(OldReport.noLocation(
                 doc.get("title"),
                 doc.get("trailhead"),
@@ -100,9 +99,9 @@ class MyAppState extends ChangeNotifier {
                 doc.get("description"),
                 doc.get("severity"),
                 doc.get("image")));
-          } else if (doc.get("longitude").toString() == ("No Location") &&
-              !(doc.get("image").toString() == ("No Image"))) {
-            addReport(OldReport.noPhotos(
+          } else if (doc.get("longitude").toString() != ("no location") &&
+              (doc.get("image").toString() == ("no image"))) {
+            addReport(OldReport.noImage(
                 doc.get("title"),
                 doc.get("trailhead"),
                 doc.get("date"),
@@ -113,7 +112,7 @@ class MyAppState extends ChangeNotifier {
                 doc.get("longitude")));
           } else {
             addReport(
-              OldReport.noPhotosNoLocation(
+              OldReport.noImageNoLocation(
                   doc.get("title"),
                   doc.get("trailhead"),
                   doc.get("date"),
