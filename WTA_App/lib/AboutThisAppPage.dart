@@ -9,7 +9,7 @@ class AboutThisAppPage extends StatelessWidget {
         appBar: AppBar(
           title: Text("About This App"),
           titleTextStyle:
-          DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2.0),
+              DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2.0),
         ),
         body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [

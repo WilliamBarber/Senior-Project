@@ -34,7 +34,6 @@ class UserNamePage extends StatelessWidget {
                 },
               ),
             ),
-
             ElevatedButton(
                 onPressed: () {
                   appState.setUserName(tempUserName);

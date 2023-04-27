@@ -13,9 +13,8 @@ class AllPreviousReportsPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text("All Previous Reports"),
-          titleTextStyle: DefaultTextStyle.of(context)
-              .style
-              .apply(fontSizeFactor: 2.0),
+          titleTextStyle:
+              DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2.0),
         ),
         body: oldReports.isEmpty
             ? Center(
@@ -71,38 +70,38 @@ class AllPreviousReportsPage extends StatelessWidget {
                       itemCount: oldReports.length,
                       itemBuilder: (context, reportNumber) {
                         return Card(
-                            margin: EdgeInsets.only(top: 10, bottom: 10),
-                            child: FractionallySizedBox(
-                              widthFactor: 0.85,
-                              child: Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                          'Title: ${appState.getReport(reportNumber).getTitle()}'),
-                                      Text(
-                                          'Date: ${appState.getReport(reportNumber).getDate()}'),
-                                      Text(
-                                          'Issue Category: ${appState.getReport(reportNumber).getCategory()}'),
-                                      ElevatedButton(
-                                        child: Text('View Report'),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    OldReportPage(
-                                                        report: appState
-                                                            .getReport(
-                                                                reportNumber))),
-                                          );
-                                        },
-                                      ),
-                                    ]),
-                              ),
+                          margin: EdgeInsets.only(top: 10, bottom: 10),
+                          child: FractionallySizedBox(
+                            widthFactor: 0.85,
+                            child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                        'Title: ${appState.getReport(reportNumber).getTitle()}'),
+                                    Text(
+                                        'Date: ${appState.getReport(reportNumber).getDate()}'),
+                                    Text(
+                                        'Issue Category: ${appState.getReport(reportNumber).getCategory()}'),
+                                    ElevatedButton(
+                                      child: Text('View Report'),
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  OldReportPage(
+                                                      report:
+                                                          appState.getReport(
+                                                              reportNumber))),
+                                        );
+                                      },
+                                    ),
+                                  ]),
                             ),
-                          );
+                          ),
+                        );
                       }),
                 ),
               ));

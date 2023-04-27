@@ -17,7 +17,6 @@ class NewReport {
       double longitude,
       String date,
       String time) async {
-
     print('');
     print('');
     print('');
@@ -36,7 +35,7 @@ class NewReport {
     final storageRef = FirebaseStorage.instance.ref();
     await storageRef.child("$date-$time-$title").putFile(imageFile!);
     final imageURL =
-      await storageRef.child("$date-$time-$title").getDownloadURL();
+        await storageRef.child("$date-$time-$title").getDownloadURL();
 
     //End Image Submission
 
@@ -111,10 +110,16 @@ class NewReport {
     return imageURL;
   }
 
-  static submitNoImageReport(String userName,
-      String title, String description, double severity,
-      String issue, double latitude,
-      double longitude, String date, String time) async {
+  static submitNoImageReport(
+      String userName,
+      String title,
+      String description,
+      double severity,
+      String issue,
+      double latitude,
+      double longitude,
+      String date,
+      String time) async {
     print('');
     print('');
     print('');

@@ -6,7 +6,6 @@ import 'NewReportPage.dart';
 import 'SettingsPage.dart';
 import 'MyAppState.dart';
 
-
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -26,12 +25,11 @@ class MyHomePage extends StatelessWidget {
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
-    if (appState.getUserName() == "NoUserNameCreated"){
+    if (appState.getUserName() == "NoUserNameCreated") {
       String userName = 'NoUserNameCreated';
       return AlertDialog(
         title: const Text('Sign In'),
-        content: const Text(
-            'Please enter or create your username'),
+        content: const Text('Please enter or create your username'),
         actions: <Widget>[
           TextField(
             textCapitalization: TextCapitalization.words,
@@ -51,8 +49,7 @@ class MyHomePage extends StatelessWidget {
           ),
         ],
       );
-    }
-    else {
+    } else {
       return LayoutBuilder(builder: (context, constraints) {
         return Scaffold(
           body: Column(
@@ -60,10 +57,7 @@ class MyHomePage extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                  color: Theme
-                      .of(context)
-                      .colorScheme
-                      .primaryContainer,
+                  color: Theme.of(context).colorScheme.primaryContainer,
                   child: page,
                 ),
               ),
@@ -89,28 +83,26 @@ class MyHomePage extends StatelessWidget {
               if ((index == 0 || index == 2) && selectedIndex == 1) {
                 showDialog<String>(
                   context: context,
-                  builder: (BuildContext context) =>
-                      AlertDialog(
-                        title: const Text('Cancel Report?'),
-                        content: const Text(
-                            'Cancel report and go to the selected screen?'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, 'No'),
-                            child: const Text('No'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context, 'Yes');
-                              appState.setPage(index);
-                            },
-                            child: const Text('Yes'),
-                          ),
-                        ],
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text('Cancel Report?'),
+                    content: const Text(
+                        'Cancel report and go to the selected screen?'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'No'),
+                        child: const Text('No'),
                       ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context, 'Yes');
+                          appState.setPage(index);
+                        },
+                        child: const Text('Yes'),
+                      ),
+                    ],
+                  ),
                 );
-              }
-              else {
+              } else {
                 appState.setPage(index);
               }
             },

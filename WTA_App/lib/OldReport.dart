@@ -14,8 +14,8 @@ class OldReport {
       this.severity, this.latitude, this.longitude);
   OldReport.noLocation(this.title, this.date, this.category, this.description,
       this.severity, this.photos);
-  OldReport.noPhotosNoLocation(this.title, this.date, this.category, this.description,
-      this.severity);
+  OldReport.noPhotosNoLocation(
+      this.title, this.date, this.category, this.description, this.severity);
   OldReport.empty();
 
   String getTitle() {

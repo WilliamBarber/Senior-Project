@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'MyAppState.dart';
 import 'OldReportPage.dart';
 
-
 //TODO: display map in previous reports card (like how photos are done currently)
 //TODO: required/optional fields
 //TODO: authentication

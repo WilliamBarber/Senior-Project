@@ -73,7 +73,7 @@ class MyAppState extends ChangeNotifier {
     return oldReports;
   }
 
-  void refreshOldReports() async{
+  void refreshOldReports() async {
     oldReports.clear();
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
