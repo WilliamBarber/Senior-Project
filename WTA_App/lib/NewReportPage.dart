@@ -53,7 +53,7 @@ class _NewReportPageState extends State<NewReportPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                                style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.75),
+                                style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.7),
                                 'Title:'),
                             TextField(
                               textCapitalization: TextCapitalization.words,
@@ -67,7 +67,7 @@ class _NewReportPageState extends State<NewReportPage> {
                             ),
                             Padding(padding: EdgeInsets.only(top: 10.0, bottom: 10.0),),
                             Text(
-                                style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.75),
+                                style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.7),
                                 'Details:'),
                             TextField(
                               textCapitalization: TextCapitalization.words,
