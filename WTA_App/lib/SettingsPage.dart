@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'AllPreviousReportsPage.dart';
 import 'AboutThisAppPage.dart';
+import 'package:flutterfire_ui/auth.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -24,6 +25,27 @@ class SettingsPage extends StatelessWidget {
                   );
                 },
                 child: Text('View All Previous Reports'),
+              ),
+            ),
+            FractionallySizedBox(
+              widthFactor: 0.7,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return Scaffold(body: ProfileScreen(
+                        providerConfigs: [
+                          EmailProviderConfiguration(),
+                        ],
+                        avatarSize: 100,
+                      ),
+                      );
+                    },
+                  ),
+                  );
+                },
+                child: Text('Account Details'),
               ),
             ),
             FractionallySizedBox(
