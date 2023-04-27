@@ -23,12 +23,6 @@ class AllPreviousReportsPage extends StatelessWidget {
                   child: ListView(
                     shrinkWrap: true,
                     children: [
-                      Text(
-                        'Recent Reports',
-                        style: DefaultTextStyle.of(context)
-                            .style
-                            .apply(fontSizeFactor: 2.0),
-                      ),
                       Card(
                         margin: EdgeInsets.only(top: 10, bottom: 10),
                         child: FractionallySizedBox(

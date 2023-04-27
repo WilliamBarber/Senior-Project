@@ -9,6 +9,7 @@ class NewReport {
   static Future<String> submitReport(
       String userName,
       String title,
+      String trailhead,
       String description,
       double severity,
       String issue,
@@ -42,6 +43,7 @@ class NewReport {
     db.collection("issue report").doc("$date-$time-$title").set({
       "userName": userName,
       "title": title,
+      "trailhead": trailhead,
       "description": description,
       "severity": severity,
       "issue": issue,
@@ -62,6 +64,7 @@ class NewReport {
   static Future<String> submitNoLocationReport(
       String userName,
       String title,
+      String trailhead,
       String description,
       double severity,
       String issue,
@@ -93,6 +96,7 @@ class NewReport {
     db.collection("issue report").doc("$date-$time-$title").set({
       "userName": userName,
       "title": title,
+      "trailhead": trailhead,
       "description": description,
       "severity": severity,
       "issue": issue,
@@ -113,6 +117,7 @@ class NewReport {
   static submitNoImageReport(
       String userName,
       String title,
+      String trailhead,
       String description,
       double severity,
       String issue,
@@ -136,6 +141,7 @@ class NewReport {
     db.collection("issue report").doc("$date-$time-$title").set({
       "userName": userName,
       "title": title,
+      "trailhead": trailhead,
       "description": description,
       "severity": severity,
       "issue": issue,
@@ -155,6 +161,7 @@ class NewReport {
   static submitNoImageNoLocationReport(
       String userName,
       String title,
+      String trailhead,
       String description,
       double severity,
       String issue,
@@ -176,6 +183,7 @@ class NewReport {
     db.collection("issue report").doc("$date-$time-$title").set({
       "userName": userName,
       "title": title,
+      "trailhead": trailhead,
       "description": description,
       "severity": severity,
       "issue": issue,

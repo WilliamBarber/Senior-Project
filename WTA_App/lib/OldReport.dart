@@ -1,5 +1,6 @@
 class OldReport {
   String title = 'no title';
+  String trailhead = 'no trailhead';
   String date = 'no date';
   String category = 'no category';
   String description = 'no description';
@@ -8,18 +9,22 @@ class OldReport {
   double longitude = -1000;
   String photos = 'no photos';
 
-  OldReport(this.title, this.date, this.category, this.description,
+  OldReport(this.title, this.trailhead, this.date, this.category, this.description,
       this.severity, this.latitude, this.longitude, this.photos);
-  OldReport.noPhotos(this.title, this.date, this.category, this.description,
+  OldReport.noPhotos(this.title, this.trailhead, this.date, this.category, this.description,
       this.severity, this.latitude, this.longitude);
-  OldReport.noLocation(this.title, this.date, this.category, this.description,
+  OldReport.noLocation(this.title, this.trailhead, this.date, this.category, this.description,
       this.severity, this.photos);
   OldReport.noPhotosNoLocation(
-      this.title, this.date, this.category, this.description, this.severity);
+      this.title, this.trailhead, this.date, this.category, this.description, this.severity);
   OldReport.empty();
 
   String getTitle() {
     return title;
+  }
+
+  String getTrailhead(){
+    return trailhead;
   }
 
   String getDate() {

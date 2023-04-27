@@ -32,8 +32,6 @@ class MyAppState extends ChangeNotifier {
   }
 
   void setLocation(double? latitude, double? longitude) {
-    print('*********************LATITUDE*********************');
-    print(latitude);
     this.latitude = latitude;
     this.longitude = longitude;
     locationUsed = false;
@@ -89,6 +87,7 @@ class MyAppState extends ChangeNotifier {
               doc.get("image").toString() == ("No Image"))) {
             addReport(OldReport(
                 doc.get("title"),
+                doc.get("trailhead"),
                 doc.get("date"),
                 doc.get("issue"),
                 doc.get("description"),
@@ -100,6 +99,7 @@ class MyAppState extends ChangeNotifier {
               !(doc.get("image").toString() == ("No Image"))) {
             addReport(OldReport.noLocation(
                 doc.get("title"),
+                doc.get("trailhead"),
                 doc.get("date"),
                 doc.get("issue"),
                 doc.get("description"),
@@ -109,6 +109,7 @@ class MyAppState extends ChangeNotifier {
               !(doc.get("image").toString() == ("No Image"))) {
             addReport(OldReport.noPhotos(
                 doc.get("title"),
+                doc.get("trailhead"),
                 doc.get("date"),
                 doc.get("issue"),
                 doc.get("description"),
@@ -119,6 +120,7 @@ class MyAppState extends ChangeNotifier {
             addReport(
               OldReport.noPhotosNoLocation(
                   doc.get("title"),
+                  doc.get("trailhead"),
                   doc.get("date"),
                   doc.get("issue"),
                   doc.get("description"),

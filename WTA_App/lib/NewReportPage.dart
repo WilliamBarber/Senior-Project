@@ -10,6 +10,7 @@ import 'NewReport.dart';
 import 'LocationPage.dart';
 
 String title = "no title";
+String trailhead = 'no trailhead';
 String description = 'no description';
 
 class NewReportPage extends StatefulWidget {
@@ -29,9 +30,15 @@ class _NewReportPageState extends State<NewReportPage> {
       child: ListView(
         shrinkWrap: true,
         children: [
+          FractionallySizedBox(
+          widthFactor: 0.85,
+        child: Text(
+            style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 2.0),
+            'New Report Submission'),
+      ),
+
           Center(
             child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Card(
                 margin: EdgeInsets.only(top: 10, bottom: 10),
                 child: FractionallySizedBox(
@@ -41,16 +48,38 @@ class _NewReportPageState extends State<NewReportPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TextField(
-                          textCapitalization: TextCapitalization.words,
-                          decoration: const InputDecoration(
-                            border: UnderlineInputBorder(),
-                            labelText: 'Enter a Title for Your Report',
-                          ),
-                          onChanged: (text) {
-                            print('First text field: $text');
-                            title = text;
-                          },
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                                style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.75),
+                                'Title:'),
+                            TextField(
+                              textCapitalization: TextCapitalization.words,
+                              decoration: const InputDecoration(
+                                border: UnderlineInputBorder(),
+                                labelText: 'Enter a Title for Your Report',
+                              ),
+                              onChanged: (text) {
+                                title = text;
+                              },
+                            ),
+                            Padding(padding: EdgeInsets.only(top: 10.0, bottom: 10.0),),
+                            Text(
+                                style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.75),
+                                'Details:'),
+                            TextField(
+                              textCapitalization: TextCapitalization.words,
+                              decoration: const InputDecoration(
+                                border: UnderlineInputBorder(),
+                                labelText: 'Enter the Trailhead Name',
+                              ),
+                              onChanged: (text) {
+                                trailhead = text;
+                              },
+                            ),
+                          ],
                         ),
                         DropDownButton(),
                         SeverityIndicator(),
@@ -60,7 +89,6 @@ class _NewReportPageState extends State<NewReportPage> {
                             labelText: 'Enter a Description for Your Report',
                           ),
                           onChanged: (text) {
-                            print('Description text field: $text');
                             description = text;
                           },
                           maxLines: null,
@@ -134,15 +162,13 @@ class _NewReportPageState extends State<NewReportPage> {
                                         "${dateTime.day}-${dateTime.month}-${dateTime.year}";
                                     String time =
                                         "${dateTime.hour}-${dateTime.minute}-${dateTime.second}";
-                                    print(
-                                        "**********************APPSTATE.GETLATITUDE()*****************");
-                                    print(appState.getLatitude());
                                     if (imageFile != null &&
                                         appState.getLatitude() > -1000) {
                                       String imageURL =
                                           await NewReport.submitReport(
                                         appState.getUserName(),
                                         title,
+                                        trailhead,
                                         description,
                                         severity,
                                         issue,
@@ -154,6 +180,7 @@ class _NewReportPageState extends State<NewReportPage> {
                                       );
                                       appState.addReport(OldReport(
                                           title,
+                                          trailhead,
                                           date,
                                           issue,
                                           description,
@@ -166,6 +193,7 @@ class _NewReportPageState extends State<NewReportPage> {
                                       NewReport.submitNoImageReport(
                                           appState.getUserName(),
                                           title,
+                                          trailhead,
                                           description,
                                           severity,
                                           issue,
@@ -175,6 +203,7 @@ class _NewReportPageState extends State<NewReportPage> {
                                           time);
                                       appState.addReport(OldReport.noPhotos(
                                           title,
+                                          trailhead,
                                           date,
                                           issue,
                                           description,
@@ -187,6 +216,7 @@ class _NewReportPageState extends State<NewReportPage> {
                                           .submitNoLocationReport(
                                               appState.getUserName(),
                                               title,
+                                              trailhead,
                                               description,
                                               severity,
                                               issue,
@@ -195,6 +225,7 @@ class _NewReportPageState extends State<NewReportPage> {
                                               time);
                                       appState.addReport(OldReport.noLocation(
                                           title,
+                                          trailhead,
                                           date,
                                           issue,
                                           description,
@@ -204,6 +235,7 @@ class _NewReportPageState extends State<NewReportPage> {
                                       NewReport.submitNoImageNoLocationReport(
                                           appState.getUserName(),
                                           title,
+                                          trailhead,
                                           description,
                                           severity,
                                           issue,
@@ -212,12 +244,14 @@ class _NewReportPageState extends State<NewReportPage> {
                                       appState.addReport(
                                           OldReport.noPhotosNoLocation(
                                               title,
+                                              trailhead,
                                               date,
                                               issue,
                                               description,
                                               severity));
                                     }
                                     title = "no title";
+                                    trailhead = 'no trailhead';
                                     description = "no description";
                                     appState.setLocationUsed(true);
                                     severity = 1;
@@ -258,7 +292,6 @@ class _NewReportPageState extends State<NewReportPage> {
                   ),
                 ),
               ),
-            ]),
           ),
         ],
       ),
