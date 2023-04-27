@@ -1,16 +1,41 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 
-class MapViewerPage extends StatelessWidget {
+class MapViewerPage extends StatefulWidget {
   const MapViewerPage(
       {super.key, required this.latitude, required this.longitude});
 
   final double latitude;
   final double longitude;
 
+  @override
+  State<MapViewerPage> createState() => _MapViewerPageState();
+}
+
+class _MapViewerPageState extends State<MapViewerPage> {
+  MapboxMap? mapboxMap;
+  PointAnnotation? pointAnnotation;
+  PointAnnotationManager? pointAnnotationManager;
   _onMapCreated(MapboxMap mapboxMap) {
     var map = mapboxMap;
-    map.location.updateSettings(LocationComponentSettings(enabled: true));
+
+    mapboxMap.annotations.createPointAnnotationManager().then((value) async {
+      pointAnnotationManager = value;
+      final ByteData bytes =
+      await rootBundle.load('images/red_marker.png');
+      final Uint8List image = bytes.buffer.asUint8List();
+      var options = <PointAnnotationOptions>[];
+        options.add(PointAnnotationOptions(
+            geometry: Point(
+                coordinates: Position(
+                  widget.longitude,
+                  widget.latitude,
+                )).toJson(), image: image));
+      pointAnnotationManager?.createMulti(options);
+    });
   }
 
   @override
@@ -28,7 +53,7 @@ class MapViewerPage extends StatelessWidget {
         key: ValueKey("mapWidget"),
         resourceOptions: ResourceOptions(accessToken: ACCESS_TOKEN),
         cameraOptions: CameraOptions(
-            center: Point(coordinates: Position(longitude, latitude)).toJson(),
+            center: Point(coordinates: Position(widget.longitude, widget.latitude)).toJson(),
             zoom: 15.0),
         styleUri: MapboxStyles.OUTDOORS,
         onMapCreated: _onMapCreated,

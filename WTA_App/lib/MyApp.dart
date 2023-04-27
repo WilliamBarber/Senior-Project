@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Trail Issues Reporting App',
         theme: ThemeData(
           useMaterial3: true,
