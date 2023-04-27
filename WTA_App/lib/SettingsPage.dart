@@ -7,7 +7,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        child: ListView(shrinkWrap: true, children: [
       FractionallySizedBox(
         widthFactor: 0.85,
         child: Padding(
