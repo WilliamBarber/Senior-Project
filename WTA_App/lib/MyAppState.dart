@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'OldReport.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 class MyAppState extends ChangeNotifier {
-  String userName = 'NoUserNameCreated';
+  String? userName = 'NoUserNameCreated';
   var oldReports = <OldReport>[];
   var selectedIndex = 0;
   var appInitialized = false;
@@ -18,12 +16,12 @@ class MyAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setUserName(String userName) {
+  void setUserName(String? userName) {
     this.userName = userName;
     notifyListeners();
   }
 
-  String getUserName() {
+  String? getUserName() {
     return userName;
   }
 
@@ -73,9 +71,6 @@ class MyAppState extends ChangeNotifier {
 
   void refreshOldReports() async {
     oldReports.clear();
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
 
     var db = FirebaseFirestore.instance;
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'AllPreviousReportsPage.dart';
-import 'UserNamePage.dart';
 import 'AboutThisAppPage.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -25,20 +24,6 @@ class SettingsPage extends StatelessWidget {
                   );
                 },
                 child: Text('View All Previous Reports'),
-              ),
-            ),
-            FractionallySizedBox(
-              widthFactor: 0.7,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) {
-                      return Scaffold(body: UserNamePage());
-                    }),
-                  );
-                },
-                child: Text('Change Account'),
               ),
             ),
             FractionallySizedBox(

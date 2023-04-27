@@ -1,13 +1,10 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'firebase_options.dart';
 
 class NewReport {
   static Future<String> submitReport(
-      String userName,
+      String? userName,
       String title,
       String trailhead,
       String description,
@@ -25,14 +22,9 @@ class NewReport {
     print('');
     print('');
 
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-
     var db = FirebaseFirestore.instance;
 
     //Start Image Submission
-    await FirebaseAuth.instance.signInAnonymously();
     final storageRef = FirebaseStorage.instance.ref();
     await storageRef.child("$date-$time-$title").putFile(imageFile!);
     final imageURL =
@@ -62,7 +54,7 @@ class NewReport {
   }
 
   static Future<String> submitNoLocationReport(
-      String userName,
+      String? userName,
       String title,
       String trailhead,
       String description,
@@ -78,14 +70,9 @@ class NewReport {
     print('');
     print('');
 
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-
     var db = FirebaseFirestore.instance;
 
     //Start Image Submission
-    await FirebaseAuth.instance.signInAnonymously();
     final storageRef = FirebaseStorage.instance.ref();
     await storageRef.child("$date-$time-$title").putFile(imageFile!);
     final imageURL =
@@ -115,7 +102,7 @@ class NewReport {
   }
 
   static submitNoImageReport(
-      String userName,
+      String? userName,
       String title,
       String trailhead,
       String description,
@@ -131,10 +118,6 @@ class NewReport {
     print("attempting submission");
     print('');
     print('');
-
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
 
     var db = FirebaseFirestore.instance;
 
@@ -159,7 +142,7 @@ class NewReport {
   }
 
   static submitNoImageNoLocationReport(
-      String userName,
+      String? userName,
       String title,
       String trailhead,
       String description,
@@ -173,10 +156,6 @@ class NewReport {
     print("attempting submission");
     print('');
     print('');
-
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
 
     var db = FirebaseFirestore.instance;
 

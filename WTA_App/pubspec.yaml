@@ -39,7 +39,7 @@ dependencies:
   custom_rating_bar: ^2.0.4
   cloud_firestore: ^4.5.0
   firebase_core: ^2.8.0
-  firebase_auth: ^4.4.0
+  firebase_auth: ^4.4.2
   firebase_ui_auth: ^1.1.17
   image_picker: ^0.8.7
   firebase_storage: ^11.1.0
@@ -47,6 +47,7 @@ dependencies:
   mapbox_maps_flutter: ^0.4.2
   permission_handler: ^10.2.0
   location: ^4.4.0
+  flutterfire_ui: ^0.4.3+20
 
 dev_dependencies:
   flutter_test:
