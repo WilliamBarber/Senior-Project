@@ -16,11 +16,10 @@ class MapViewerPage extends StatefulWidget {
 }
 
 class _MapViewerPageState extends State<MapViewerPage> {
-  MapboxMap? mapboxMap;
-  PointAnnotation? pointAnnotation;
-  PointAnnotationManager? pointAnnotationManager;
-  _onMapCreated(MapboxMap mapboxMap) {
 
+  PointAnnotationManager? pointAnnotationManager;
+
+  _onMapCreated(MapboxMap mapboxMap) {
     mapboxMap.annotations.createPointAnnotationManager().then((value) async {
       pointAnnotationManager = value;
       final ByteData bytes =
