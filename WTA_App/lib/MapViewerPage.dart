@@ -20,21 +20,19 @@ class _MapViewerPageState extends State<MapViewerPage> {
   PointAnnotation? pointAnnotation;
   PointAnnotationManager? pointAnnotationManager;
   _onMapCreated(MapboxMap mapboxMap) {
-    var map = mapboxMap;
 
     mapboxMap.annotations.createPointAnnotationManager().then((value) async {
       pointAnnotationManager = value;
       final ByteData bytes =
       await rootBundle.load('images/red_marker.png');
       final Uint8List image = bytes.buffer.asUint8List();
-      var options = <PointAnnotationOptions>[];
-        options.add(PointAnnotationOptions(
+      var options = (PointAnnotationOptions(
             geometry: Point(
                 coordinates: Position(
                   widget.longitude,
                   widget.latitude,
                 )).toJson(), image: image));
-      pointAnnotationManager?.createMulti(options);
+      pointAnnotationManager?.create(options);
     });
   }
 
